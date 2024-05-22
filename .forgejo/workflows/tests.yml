@@ -1,0 +1,13 @@
+---
+when:
+  event: [push, pull_request, tag, manual]
+
+steps:
+  - name: python unit tests
+    image: python:latest
+    commands:
+      - apt update
+      - apt install --yes locales python3-poetry
+      - poetry install --without deploy
+      - poetry run pre-commit run --color=always --all-files
+      - poetry run pytest --cov --color=yes

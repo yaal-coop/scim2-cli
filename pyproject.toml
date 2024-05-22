@@ -1,0 +1,99 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "scim-cli"
+version = "0.1.0"
+description = "A SCIM utility CLI"
+authors = ["Yaal Coop <contact@yaal.coop>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^8.1.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
+pytest-coverage = "^0.0"
+
+[tool.poetry.group.doc.dependencies]
+shibuya = "^2024.5.15"
+sphinx = "^7.3.7"
+sphinx-click = "^6.0.0"
+
+[tool.poetry.scripts]
+scim = "scim_cli:cli"
+
+[tool.coverage.run]
+source = [
+    "scim_cli",
+    "tests",
+]
+omit = [".tox/*"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "@pytest.mark.skip",
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "except ImportError",
+    "if app.debug",
+]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line-too-long
+    "E722", # bare-except
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[too.ruff.format]
+docstring-code-format = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = true
+skipsdist = true
+envlist =
+    style
+    py39
+    py310
+    py311
+    py312
+    doc
+    coverage
+
+[testenv]
+allowlist_externals = poetry
+commands =
+    poetry install
+    poetry run pytest --showlocals --full-trace {posargs}
+
+[testenv:style]
+commands =
+    pip install pre-commit
+    pre-commit run --all-files
+
+[testenv:doc]
+commands =
+    poetry install --with doc --without dev
+    poetry run sphinx-build doc build/sphinx/html
+
+[testenv:coverage]
+commands =
+    poetry install
+    poetry run pytest --cov --cov-fail-under=100 --cov-report term:skip-covered {posargs}
+    poetry run coverage html
+"""
