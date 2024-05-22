@@ -29,7 +29,9 @@ def cli(ctx, url):
 def get(ctx):
     """Perform a SCIM GET request.
 
-    Data passed in JSON format to stdin is sent as request arguments::
+    Data passed in JSON format to stdin is sent as request arguments:
+
+    .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example get
 
@@ -50,7 +52,9 @@ def get(ctx):
 def post(ctx):
     """Perform a SCIM POST request.
 
-    Data passed in JSON format to stdin is sent as request payload::
+    Data passed in JSON format to stdin is sent as request payload:
+
+    .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example post
 
@@ -71,7 +75,9 @@ def post(ctx):
 def put(ctx):
     """Perform a SCIM PUT request.
 
-    Data passed in JSON format to stdin is sent as request payload::
+    Data passed in JSON format to stdin is sent as request payload:
+
+    .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example put
 
@@ -92,7 +98,9 @@ def put(ctx):
 def patch(ctx):
     """Perform a SCIM PATCH request.
 
-    Data passed in JSON format to stdin is sent as request payload::
+    Data passed in JSON format to stdin is sent as request payload:
+
+    .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example patch
 
@@ -113,7 +121,9 @@ def patch(ctx):
 def delete(ctx):
     """Perform a SCIM DELETE request.
 
-    Data passed in JSON format to stdin is sent as request payload::
+    Data passed in JSON format to stdin is sent as request payload:
+
+    .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example delete
 
