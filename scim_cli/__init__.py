@@ -2,7 +2,9 @@ import json
 
 import click
 import requests
+from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
+DOC_URL = "https://scim-cli.readthedocs.io/"
 BASE_HEADERS = {
     "Accept": "application/scim+json",
     "Content-Type": "application/scim+json",
@@ -22,7 +24,7 @@ def cli(ctx, url):
         ctx.obj["STDIN"] = json.loads(stdin)
 
 
-@cli.command()
+@cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def get(ctx):
     """Perform a SCIM GET request.
@@ -43,7 +45,7 @@ def get(ctx):
     click.echo(response.text)
 
 
-@cli.command()
+@cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def post(ctx):
     """Perform a SCIM POST request.
@@ -64,7 +66,7 @@ def post(ctx):
     click.echo(response.text)
 
 
-@cli.command()
+@cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def put(ctx):
     """Perform a SCIM PUT request.
@@ -85,7 +87,7 @@ def put(ctx):
     click.echo(response.text)
 
 
-@cli.command()
+@cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def patch(ctx):
     """Perform a SCIM PATCH request.
@@ -106,7 +108,7 @@ def patch(ctx):
     click.echo(response.text)
 
 
-@cli.command()
+@cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def delete(ctx):
     """Perform a SCIM DELETE request.

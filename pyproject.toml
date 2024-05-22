@@ -25,9 +25,10 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 click = "^8.1.7"
 requests = "^2.32.2"
+sphinx-click-rst-to-ansi-formatter = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
@@ -84,7 +85,6 @@ isolated_build = true
 skipsdist = true
 envlist =
     style
-    py39
     py310
     py311
     py312
