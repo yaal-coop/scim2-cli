@@ -27,10 +27,12 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.9"
 click = "^8.1.7"
+requests = "^2.32.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
 pytest-coverage = "^0.0"
+pytest-httpserver = "^1.0.10"
 
 [tool.poetry.group.doc.dependencies]
 shibuya = "^2024.5.15"
