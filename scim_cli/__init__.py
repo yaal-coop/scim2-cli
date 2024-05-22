@@ -27,15 +27,13 @@ def cli(ctx, url):
 @cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def get(ctx):
-    """Perform a SCIM GET request.
+    """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request.
 
     Data passed in JSON format to stdin is sent as request arguments:
 
     .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example get
-
-    Details on: https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1
     """
 
     response = requests.get(
@@ -50,15 +48,13 @@ def get(ctx):
 @cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def post(ctx):
-    """Perform a SCIM POST request.
+    """Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request.
 
     Data passed in JSON format to stdin is sent as request payload:
 
     .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example post
-
-    https://www.rfc-editor.org/rfc/rfc7644#section-3.3
     """
 
     response = requests.post(
@@ -73,15 +69,13 @@ def post(ctx):
 @cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def put(ctx):
-    """Perform a SCIM PUT request.
+    """Perform a `SCIM PUT <https://www.rfc-editor.org/rfc/rfc7644#section-3.5.1>`_ request.
 
     Data passed in JSON format to stdin is sent as request payload:
 
     .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example put
-
-    https://www.rfc-editor.org/rfc/rfc7644#section-3.5.1
     """
 
     response = requests.put(
@@ -96,15 +90,13 @@ def put(ctx):
 @cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def patch(ctx):
-    """Perform a SCIM PATCH request.
+    """Perform a `SCIM PATCH <https://www.rfc-editor.org/rfc/rfc7644#section-3.5.2>`_ request.
 
     Data passed in JSON format to stdin is sent as request payload:
 
     .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example patch
-
-    https://www.rfc-editor.org/rfc/rfc7644#section-3.5.2
     """
 
     response = requests.patch(
@@ -119,15 +111,13 @@ def patch(ctx):
 @cli.command(cls=make_rst_to_ansi_formatter(DOC_URL))
 @click.pass_context
 def delete(ctx):
-    """Perform a SCIM DELETE request.
+    """Perform a `SCIM DELETE <https://www.rfc-editor.org/rfc/rfc7644#section-3.6>`_ request.
 
     Data passed in JSON format to stdin is sent as request payload:
 
     .. code-block:: bash
 
         echo '{"foo": "bar"}' | scim https://scim.example delete
-
-    https://www.rfc-editor.org/rfc/rfc7644#section-3.6
     """
 
     response = requests.delete(
