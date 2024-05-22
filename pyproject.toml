@@ -5,10 +5,24 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "scim-cli"
 version = "0.1.0"
-description = "A SCIM utility CLI"
+description = " SCIM application development CLI"
 authors = ["Yaal Coop <contact@yaal.coop>"]
 license = "MIT"
 readme = "README.md"
+keywords = ["scim", "scim2", "provisioning"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Web Environment",
+    "Programming Language :: Python",
+    "Operating System :: OS Independent",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
