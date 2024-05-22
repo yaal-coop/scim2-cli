@@ -56,21 +56,9 @@ html_theme_options = {
     ],
 }
 
-# -- Options for HTMLHelp output ------------------------------------------
-
-htmlhelp_basename = "scim_clidoc"
-
-
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {}
-latex_documents = [
-    (master_doc, "scim_cli.tex", "scim_cli Documentation", "Yaal", "manual")
-]
-
 # -- Options for manual page output ---------------------------------------
 
-man_pages = [(master_doc, "scim_cli", "scim_cli Documentation", [author], 1)]
+man_pages = [(master_doc, "scim-cli", "scim-cli Documentation", [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 

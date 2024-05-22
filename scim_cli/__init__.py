@@ -27,7 +27,11 @@ def cli(ctx, url):
 def get(ctx):
     """Perform a SCIM GET request.
 
-    https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1
+    Data passed in JSON format to stdin is sent as request arguments::
+
+        echo '{"foo": "bar"}' | scim https://scim.example get
+
+    Details on: https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1
     """
 
     response = requests.get(
@@ -43,6 +47,10 @@ def get(ctx):
 @click.pass_context
 def post(ctx):
     """Perform a SCIM POST request.
+
+    Data passed in JSON format to stdin is sent as request payload::
+
+        echo '{"foo": "bar"}' | scim https://scim.example post
 
     https://www.rfc-editor.org/rfc/rfc7644#section-3.3
     """
@@ -61,6 +69,10 @@ def post(ctx):
 def put(ctx):
     """Perform a SCIM PUT request.
 
+    Data passed in JSON format to stdin is sent as request payload::
+
+        echo '{"foo": "bar"}' | scim https://scim.example put
+
     https://www.rfc-editor.org/rfc/rfc7644#section-3.5.1
     """
 
@@ -78,6 +90,10 @@ def put(ctx):
 def patch(ctx):
     """Perform a SCIM PATCH request.
 
+    Data passed in JSON format to stdin is sent as request payload::
+
+        echo '{"foo": "bar"}' | scim https://scim.example patch
+
     https://www.rfc-editor.org/rfc/rfc7644#section-3.5.2
     """
 
@@ -94,6 +110,10 @@ def patch(ctx):
 @click.pass_context
 def delete(ctx):
     """Perform a SCIM DELETE request.
+
+    Data passed in JSON format to stdin is sent as request payload::
+
+        echo '{"foo": "bar"}' | scim https://scim.example delete
 
     https://www.rfc-editor.org/rfc/rfc7644#section-3.6
     """

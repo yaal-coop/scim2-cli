@@ -105,7 +105,8 @@ commands =
 [testenv:doc]
 commands =
     poetry install --with doc --without dev
-    poetry run sphinx-build doc build/sphinx/html
+    poetry run sphinx-build --builder html doc build/sphinx/html
+    poetry run sphinx-build --builder man doc build/sphinx/html
 
 [testenv:coverage]
 commands =
