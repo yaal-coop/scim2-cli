@@ -11,7 +11,7 @@ BASE_HEADERS = {
 }
 
 
-@click.group()
+@click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
 @click.argument("url")
 @click.pass_context
 def cli(ctx, url):
