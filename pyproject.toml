@@ -30,6 +30,9 @@ click = "^8.1.7"
 requests = "^2.32.2"
 sphinx-click-rst-to-ansi-formatter = "^0.1.0"
 
+[tool.poetry.group.doc]
+optional = true
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
 pytest-coverage = "^0.0"
