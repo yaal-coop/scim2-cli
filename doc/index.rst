@@ -7,8 +7,8 @@ scim-cli is a tool to help you develop scim applications.
 
    scim-cli is in very early development, there is nothing to use yet!
 
-.. _cli:
+.. toctree::
+    :maxdepth: 2
 
-.. click:: scim_cli:cli
-   :prog: scim
-   :nested: full
+    reference
+    changelog
