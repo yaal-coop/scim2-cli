@@ -45,7 +45,7 @@ html_baseurl = "https://scim-cli.readthedocs.io"
 html_theme_options = {
     "globaltoc_expand_depth": 3,
     "accent_color": "orange",
-    "gitlab_url": "https://codeberg.org/yaal/scim-cli",
+    "github_url": "https://github.com/yaal-coop/scim-cli",
     "mastodon_url": "https://toot.aquilenet.fr/@yaal",
     "nav_links": [
         {
