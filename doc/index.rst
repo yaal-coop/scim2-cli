@@ -1,11 +1,12 @@
-scim-cli
-========
-
-scim-cli is a tool to help you develop scim applications.
+.. include:: ../README.md
+   :parser: myst_parser.parsers.docutils_
 
 .. danger ::
 
-   scim-cli is in very early development, there is nothing to use yet!
+    scim-cli is in very early development, there is not much to use yet!
+
+Table of contents
+-----------------
 
 .. toctree::
     :maxdepth: 2

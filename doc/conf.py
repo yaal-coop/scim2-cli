@@ -25,6 +25,11 @@ project = "scim-cli"
 year = datetime.datetime.now().strftime("%Y")
 copyright = f"{year}, Yaal Coop"
 author = "Yaal Coop"
+source_suffix = {
+    ".rst": "restructuredtext",
+    ".txt": "markdown",
+    ".md": "markdown",
+}
 
 version = metadata.version("scim_cli")
 language = "en"
@@ -51,6 +56,20 @@ html_theme_options = {
         {
             "title": "SCIM",
             "url": "https://simplecloud.info/",
+            "children": [
+                {
+                    "title": "RFC7642 - SCIM: Definitions, Overview, Concepts, and Requirements",
+                    "url": "https://tools.ietf.org/html/rfc7642",
+                },
+                {
+                    "title": "RFC7643 - SCIM: Core Schema",
+                    "url": "https://tools.ietf.org/html/rfc7643",
+                },
+                {
+                    "title": "RFC7644 - SCIM: Protocol",
+                    "url": "https://tools.ietf.org/html/rfc7644",
+                },
+            ],
         },
         {"title": "PyPI", "url": "https://pypi.org/project/scim_cli"},
     ],
