@@ -72,6 +72,10 @@ html_theme_options = {
             ],
         },
         {"title": "pydantic-scim2", "url": "https://pydantic-scim2.readthedocs.io"},
+        {
+            "title": "httpx-scim-client",
+            "url": "https://httpx-scim-client.readthedocs.io",
+        },
     ],
 }
 
