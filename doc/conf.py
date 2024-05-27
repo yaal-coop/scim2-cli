@@ -54,7 +54,7 @@ html_theme_options = {
     "mastodon_url": "https://toot.aquilenet.fr/@yaal",
     "nav_links": [
         {
-            "title": "SCIM",
+            "title": "SCIM specs",
             "url": "https://simplecloud.info/",
             "children": [
                 {
@@ -71,7 +71,7 @@ html_theme_options = {
                 },
             ],
         },
-        {"title": "PyPI", "url": "https://pypi.org/project/scim_cli"},
+        {"title": "pydantic-scim2", "url": "https://pydantic-scim2.readthedocs.io"},
     ],
 }
 
