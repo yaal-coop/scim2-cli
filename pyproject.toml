@@ -3,7 +3,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "scim-cli"
+name = "scim2-cli"
 version = "0.1.0"
 description = " SCIM application development CLI"
 authors = ["Yaal Coop <contact@yaal.coop>"]
@@ -45,11 +45,12 @@ sphinx-click = "^6.0.0"
 myst-parser = "^3.0.1"
 
 [tool.poetry.scripts]
-scim = "scim_cli:cli"
+scim = "scim2_cli:cli"
+scim2 = "scim2_cli:cli"
 
 [tool.coverage.run]
 source = [
-    "scim_cli",
+    "scim2_cli",
     "tests",
 ]
 omit = [".tox/*"]

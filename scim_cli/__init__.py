@@ -4,7 +4,7 @@ import click
 import requests
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
-DOC_URL = "https://scim-cli.readthedocs.io/"
+DOC_URL = "https://scim2-cli.readthedocs.io/"
 BASE_HEADERS = {
     "Accept": "application/scim+json",
     "Content-Type": "application/scim+json",

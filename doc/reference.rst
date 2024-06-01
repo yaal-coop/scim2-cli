@@ -3,6 +3,6 @@ Reference
 
 .. _cli:
 
-.. click:: scim_cli:cli
+.. click:: scim2_cli:cli
    :prog: scim
    :nested: full

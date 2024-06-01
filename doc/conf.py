@@ -4,7 +4,7 @@ import sys
 from importlib import metadata
 
 sys.path.insert(0, os.path.abspath(".."))
-sys.path.insert(0, os.path.abspath("../scim_cli"))
+sys.path.insert(0, os.path.abspath("../scim2_cli"))
 
 # -- General configuration ------------------------------------------------
 
@@ -21,7 +21,7 @@ extensions = [
 
 templates_path = ["_templates"]
 master_doc = "index"
-project = "scim-cli"
+project = "scim2-cli"
 year = datetime.datetime.now().strftime("%Y")
 copyright = f"{year}, Yaal Coop"
 author = "Yaal Coop"
@@ -31,7 +31,7 @@ source_suffix = {
     ".md": "markdown",
 }
 
-version = metadata.version("scim_cli")
+version = metadata.version("scim2_cli")
 language = "en"
 exclude_patterns = []
 pygments_style = "sphinx"
@@ -46,11 +46,11 @@ intersphinx_mapping = {
 
 html_theme = "shibuya"
 # html_static_path = ["_static"]
-html_baseurl = "https://scim-cli.readthedocs.io"
+html_baseurl = "https://scim2-cli.readthedocs.io"
 html_theme_options = {
     "globaltoc_expand_depth": 3,
     "accent_color": "orange",
-    "github_url": "https://github.com/yaal-coop/scim-cli",
+    "github_url": "https://github.com/yaal-coop/scim2-cli",
     "mastodon_url": "https://toot.aquilenet.fr/@yaal",
     "nav_links": [
         {
@@ -73,25 +73,25 @@ html_theme_options = {
         },
         {"title": "pydantic-scim2", "url": "https://pydantic-scim2.readthedocs.io"},
         {
-            "title": "httpx-scim-client",
-            "url": "https://httpx-scim-client.readthedocs.io",
+            "title": "httpx-scim2-client",
+            "url": "https://httpx-scim2-client.readthedocs.io",
         },
     ],
 }
 
 # -- Options for manual page output ---------------------------------------
 
-man_pages = [(master_doc, "scim-cli", "scim-cli Documentation", [author], 1)]
+man_pages = [(master_doc, "scim2-cli", "scim2-cli Documentation", [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
 texinfo_documents = [
     (
         master_doc,
-        "scim_cli",
-        "scim_cli Documentation",
+        "scim2_cli",
+        "scim2_cli Documentation",
         author,
-        "scim_cli",
+        "scim2_cli",
         "One line description of project.",
         "Miscellaneous",
     )

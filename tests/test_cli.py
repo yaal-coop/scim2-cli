@@ -1,6 +1,6 @@
 import json
 
-from scim_cli import cli
+from scim2_cli import cli
 
 
 def test_help(runner):

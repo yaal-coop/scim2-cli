@@ -3,7 +3,7 @@
 
 .. danger ::
 
-    scim-cli is in very early development, there is not much to use yet!
+    scim2-cli is in very early development, there is not much to use yet!
 
 Table of contents
 -----------------
