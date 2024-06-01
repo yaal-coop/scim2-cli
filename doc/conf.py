@@ -53,28 +53,10 @@ html_theme_options = {
     "github_url": "https://github.com/yaal-coop/scim2-cli",
     "mastodon_url": "https://toot.aquilenet.fr/@yaal",
     "nav_links": [
+        {"title": "scim2-models", "url": "https://scim2-models.readthedocs.io"},
         {
-            "title": "SCIM specs",
-            "url": "https://simplecloud.info/",
-            "children": [
-                {
-                    "title": "RFC7642 - SCIM: Definitions, Overview, Concepts, and Requirements",
-                    "url": "https://tools.ietf.org/html/rfc7642",
-                },
-                {
-                    "title": "RFC7643 - SCIM: Core Schema",
-                    "url": "https://tools.ietf.org/html/rfc7643",
-                },
-                {
-                    "title": "RFC7644 - SCIM: Protocol",
-                    "url": "https://tools.ietf.org/html/rfc7644",
-                },
-            ],
-        },
-        {"title": "pydantic-scim2", "url": "https://pydantic-scim2.readthedocs.io"},
-        {
-            "title": "httpx-scim2-client",
-            "url": "https://httpx-scim2-client.readthedocs.io",
+            "title": "scim2-client",
+            "url": "https://scim2-client.readthedocs.io",
         },
     ],
 }
