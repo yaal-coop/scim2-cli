@@ -1,5 +1,3 @@
-import json
-
 import pytest
 from click.testing import CliRunner
 
@@ -10,19 +8,19 @@ def runner():
 
 
 @pytest.fixture
-def echoserver(httpserver):
-    def echo_handler(request):
-        payload = {
-            "method": request.method,
+def simple_user_payload(httpserver):
+    def wrapped(id):
+        return {
+            "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+            "id": id,
+            "userName": f"{id}@example.com",
+            "meta": {
+                "resourceType": "User",
+                "created": "2010-01-23T04:56:22Z",
+                "lastModified": "2011-05-13T04:42:34Z",
+                "version": 'W\\/"3694e05e9dff590"',
+                "location": f"http://localhost:{httpserver.port}/Users/{id}",
+            },
         }
 
-        if request.args:
-            payload["args"] = request.args
-
-        if request.data:
-            payload["payload"] = request.json if request.is_json else request.data
-
-        return json.dumps(payload)
-
-    httpserver.expect_request("/").respond_with_handler(echo_handler)
-    return httpserver
+    return wrapped
