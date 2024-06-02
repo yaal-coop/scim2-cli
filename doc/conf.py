@@ -78,8 +78,3 @@ texinfo_documents = [
         "Miscellaneous",
     )
 ]
-
-# -- Options for autosectionlabel -----------------------------------------
-
-autosectionlabel_prefix_document = True
-autosectionlabel_maxdepth = 2

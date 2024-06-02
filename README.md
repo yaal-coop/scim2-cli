@@ -10,7 +10,7 @@ pip install scim2-cli
 
 ## Usage
 
-Check the [tutorial](https://scim2-cli.readthedocs.io/en/latest/tutorial.html) and the [reference](https://scim2-cli.readthedocs.io/en/latest/reference.html) for more details.
+Check the [reference](https://scim2-cli.readthedocs.io/en/latest/reference.html) for more details.
 
 Here is an example of resource creation:
 
