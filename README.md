@@ -15,7 +15,7 @@ Check the [reference](https://scim2-cli.readthedocs.io/en/latest/reference.html)
 Here is an example of resource creation:
 
 ```shell
-$ scim2 https://auth.example --header "Authorization: Bearer 12345" create user << EOL
+$ scim2 https://auth.example --headers "Authorization: Bearer 12345" create user << EOL
 {
     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
     "userName": "bjensen@example.com"
