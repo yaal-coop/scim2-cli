@@ -1,3 +1,59 @@
 # scim2-cli
 
-A scim utility command line.
+An utility command line to help you perform requests against a SCIM server, while validating input and response payloads.
+
+## Installation
+
+```shell
+pip install scim2-cli
+```
+
+## Usage
+
+Check the [tutorial](https://scim2-cli.readthedocs.io/en/latest/tutorial.html) and the [reference](https://scim2-cli.readthedocs.io/en/latest/reference.html) for more details.
+
+Here is an example of resource creation:
+
+```shell
+$ echo {"schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"], "userName": "bjensen@example.com"} | scim2 https://auth.example create user
+{
+    "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+    "id": "2819c223-7f76-453a-919d-413861904646",
+    "userName": "bjensen@example.com",
+    "meta": {
+        "resourceType": "User",
+        "created": "2010-01-23T04:56:22Z",
+        "lastModified": "2011-05-13T04:42:34Z",
+        "version": 'W\\/"3694e05e9dff590"',
+        "location": "https://example.com/v2/Users/2819c223-7f76-453a-919d-413861904646",
+    },
+}
+```
+
+Here is an example of resource query:
+
+```shell
+$ scim2 https://auth.example query user 2819c223-7f76-453a-919d-413861904646 --count 10
+{
+    "schemas": [
+        "urn:ietf:params:scim:api:messages:2.0:ListResponse"
+    ],
+    "totalResults": 100,
+    "itemsPerPage": 10,
+    "startIndex": 1,
+    "Resources": [
+        {
+            "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+            "id": "2819c223-7f76-453a-919d-413861904646",
+            "userName": "bjensen@example.com",
+            "meta": {
+                "resourceType": "User",
+                "created": "2010-01-23T04:56:22Z",
+                "lastModified": "2011-05-13T04:42:34Z",
+                "version": 'W\\/"3694e05e9dff590"',
+                "location": "https://example.com/v2/Users/2819c223-7f76-453a-919d-413861904646",
+           }
+        }
+    ]
+}
+```
