@@ -15,7 +15,12 @@ Check the [tutorial](https://scim2-cli.readthedocs.io/en/latest/tutorial.html) a
 Here is an example of resource creation:
 
 ```shell
-$ echo {"schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"], "userName": "bjensen@example.com"} | scim2 https://auth.example create user
+$ scim2 https://auth.example create user << EOL
+{
+    "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+    "userName": "bjensen@example.com"
+}
+EOL
 {
     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
     "id": "2819c223-7f76-453a-919d-413861904646",
