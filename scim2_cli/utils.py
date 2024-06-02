@@ -7,3 +7,10 @@ INDENTATION_SIZE = 4
 def formatted_payload(obj, indent):
     indent = INDENTATION_SIZE if indent else False
     return json.dumps(obj, indent=indent)
+
+
+def split_headers(headers):
+    return {
+        header[: header.index(":")].strip(): header[header.index(":") + 1 :].strip()
+        for header in headers
+    }

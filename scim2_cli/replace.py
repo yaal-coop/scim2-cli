@@ -7,17 +7,21 @@ from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
 from .utils import DOC_URL
 from .utils import formatted_payload
+from .utils import split_headers
 
 
 @click.command(cls=make_rst_to_ansi_formatter(DOC_URL), name="replace")
 @click.pass_context
+@click.option(
+    "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
+)
 @click.option(
     "--indent/--no-indent",
     is_flag=True,
     default=True,
     help="Indent JSON response payloads.",
 )
-def replace_cli(ctx, indent):
+def replace_cli(ctx, headers, indent):
     """Perform a `SCIM PUT <https://www.rfc-editor.org/rfc/rfc7644#section-3.5.1>`_ request
     on the resources endpoint.
 
@@ -34,7 +38,7 @@ def replace_cli(ctx, indent):
         raise ClickException("Input data is missing")
 
     try:
-        response = ctx.obj["client"].replace(payload)
+        response = ctx.obj["client"].replace(payload, headers=split_headers(headers))
 
     except (httpx.HTTPError, SCIMClientError) as exc:
         raise ClickException(exc) from exc
