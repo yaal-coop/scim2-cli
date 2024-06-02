@@ -1,6 +1,13 @@
 Changelog
 =========
 
+[0.1.1] - 2024-06-02
+--------------------
+
+Added
+^^^^^
+- Commands to query, search, create, replace, delete
+
 [0.1.0] - 2024-06-01
 --------------------
 
