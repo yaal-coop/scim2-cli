@@ -103,7 +103,7 @@ def search_cli(
         message = str(scim_exc)
         if sys.version_info >= (3, 11) and hasattr(
             scim_exc, "__notes__"
-        ):  # pragma: no branch
+        ):  # pragma: no cover
             for note in scim_exc.__notes__:
                 message = f"{message}\n{note}"
         raise ClickException(message) from scim_exc
