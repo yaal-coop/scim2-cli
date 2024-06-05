@@ -2,6 +2,8 @@ import click
 import httpx
 from click import ClickException
 from scim2_client import SCIMClientError
+from scim2_models import Message
+from scim2_models import Resource
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
 from .utils import DOC_URL
@@ -47,5 +49,10 @@ def delete_cli(ctx, resource_type, id, headers, indent):
         raise ClickException(exc) from exc
 
     if response:
-        payload = formatted_payload(response.model_dump(), indent)
+        payload = (
+            response.model_dump()
+            if isinstance(response, (Resource, Message))
+            else response
+        )
+        payload = formatted_payload(payload, indent)
         click.echo(payload)
