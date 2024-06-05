@@ -28,6 +28,7 @@ classifiers = [
 python = "^3.10"
 click = "^8.1.7"
 scim2-client = "^0.1.6"
+scim2-tester = "^0.1.2"
 sphinx-click-rst-to-ansi-formatter = "^0.1.0"
 
 [tool.poetry.group.doc]

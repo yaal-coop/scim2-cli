@@ -919,6 +919,20 @@ files = [
 pydantic = {version = ">=2.7.0,<3.0.0", extras = ["email"]}
 
 [[package]]
+name = "scim2-tester"
+version = "0.1.2"
+description = " Check SCIM RFCs server compliance"
+optional = false
+python-versions = "<4.0,>=3.10"
+files = [
+    {file = "scim2_tester-0.1.2-py3-none-any.whl", hash = "sha256:8bc1b08392c84b9da1e6161c97f121efb6e12e42bef8e7ab629f01eaf45094b2"},
+    {file = "scim2_tester-0.1.2.tar.gz", hash = "sha256:c294cf15a24caf30f18ea5d49df610e65603c7f04510fb2fac45e3feffde8be7"},
+]
+
+[package.dependencies]
+scim2-client = ">=0.1.6,<0.2.0"
+
+[[package]]
 name = "shibuya"
 version = "2024.6.1"
 description = "A clean, responsive, and customizable Sphinx documentation theme with light/dark mode."
@@ -1174,4 +1188,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "5e0d9fd6095d7422a9c7720c441cf9bcc4276e6a24e1750278fccdf941a38758"
+content-hash = "d663aefc633770fa700d59f026cb936baa1d6d60ba1843d53be850f09848d421"

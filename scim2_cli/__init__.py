@@ -12,6 +12,7 @@ from .delete import delete_cli
 from .query import query_cli
 from .replace import replace_cli
 from .search import search_cli
+from .test import test_cli
 from .utils import DOC_URL
 
 
@@ -44,3 +45,4 @@ cli.add_command(query_cli)
 cli.add_command(replace_cli)
 cli.add_command(delete_cli)
 cli.add_command(search_cli)
+cli.add_command(test_cli)

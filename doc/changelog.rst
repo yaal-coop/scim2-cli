@@ -4,6 +4,7 @@ Changelog
 Added
 ^^^^^
 - Add support for passing custom headers to requests.
+- Server compliance test.
 
 [0.1.1] - 2024-06-02
 --------------------

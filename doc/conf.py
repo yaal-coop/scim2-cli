@@ -40,6 +40,7 @@ toctree_collapse = False
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
+    "scim2_tester": ("https://scim2-tester.readthedocs.io/en/latest/", None),
 }
 
 # -- Options for HTML output ----------------------------------------------
