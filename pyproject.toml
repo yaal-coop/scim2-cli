@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "scim2-cli"
-version = "0.1.1"
+version = "0.1.2"
 description = "SCIM application development CLI"
 authors = ["Yaal Coop <contact@yaal.coop>"]
 license = "MIT"

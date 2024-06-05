@@ -1,6 +1,9 @@
 Changelog
 =========
 
+[0.1.2] - 2024-06-05
+--------------------
+
 Added
 ^^^^^
 - Add support for passing custom headers to requests.
