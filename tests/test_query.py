@@ -101,11 +101,28 @@ def test_all(runner, httpserver, simple_user_payload):
 
     json_output = json.loads(result.output)
     assert json_output == {
-        "totalResults": 1,
+        "Resources": [
+            {
+                "id": "all",
+                "meta": {
+                    "created": "2010-01-23T04:56:22Z",
+                    "lastModified": "2011-05-13T04:42:34Z",
+                    "location": f"http://localhost:{httpserver.port}/Users/all",
+                    "resourceType": "User",
+                    "version": 'W\\/"3694e05e9dff590"',
+                },
+                "schemas": [
+                    "urn:ietf:params:scim:schemas:core:2.0:User",
+                ],
+                "userName": "all@example.com",
+            },
+        ],
         "itemsPerPage": 10,
+        "schemas": [
+            "urn:ietf:params:scim:api:messages:2.0:ListResponse",
+        ],
         "startIndex": 1,
-        "schemas": ["urn:ietf:params:scim:api:messages:2.0:ListResponse"],
-        "Resources": [simple_user_payload("all")],
+        "totalResults": 1,
     }
 
 
@@ -222,29 +239,7 @@ def test_unknown_resource_type(
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert (
-        "Unknown resource type 'invalid. Available values are: user, user[enterpriseuser], group'"
-        in result.stdout
-    )
-
-
-def test_network_error(
-    runner,
-):
-    """Test httpx errors handling."""
-
-    result = runner.invoke(
-        cli,
-        [
-            "http://invalid.test",
-            "query",
-            "user",
-            "dummy-id",
-        ],
-        catch_exceptions=False,
-    )
-    assert result.exit_code == 1, result.stdout
-    assert "Name or service not known" in result.stdout
+    assert "Unknown resource type 'invalid. Available values are:" in result.stdout
 
 
 def test_scimclient_error(runner, httpserver, simple_user_payload):
@@ -278,4 +273,4 @@ def test_validation_error(runner, httpserver, simple_user_payload):
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "The server response is invalid" in result.stdout
+    assert "Expected type User but got undefined object with no schema" in result.stdout

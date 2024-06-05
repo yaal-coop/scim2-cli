@@ -3,7 +3,6 @@ import json
 import click
 from httpx import Client
 from scim2_client import SCIMClient
-from scim2_models import EnterpriseUser
 from scim2_models import Group
 from scim2_models import User
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
@@ -25,9 +24,7 @@ def cli(ctx, url):
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
     client = Client(base_url=ctx.obj["URL"])
-    ctx.obj["client"] = SCIMClient(
-        client, resource_types=(User, User[EnterpriseUser], Group)
-    )
+    ctx.obj["client"] = SCIMClient(client, resource_types=(User, Group))
     ctx.obj["resource_types"] = {
         resource_type.__name__.lower(): resource_type
         for resource_type in ctx.obj["client"].resource_types

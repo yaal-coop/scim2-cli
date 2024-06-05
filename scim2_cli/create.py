@@ -1,7 +1,7 @@
+import sys
+
 import click
-import httpx
 from click import ClickException
-from pydantic import ValidationError
 from scim2_client import SCIMClientError
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
@@ -40,13 +40,14 @@ def create_cli(ctx, indent, headers):
     try:
         response = ctx.obj["client"].create(payload, headers=split_headers(headers))
 
-    except (httpx.HTTPError, SCIMClientError) as exc:
-        raise ClickException(exc) from exc
-
-    except ValidationError as exc:
-        payload = formatted_payload(exc.response_payload, indent)
-        message = f"The server response is invalid:\n{payload}\n{exc}"
-        raise ClickException(message) from exc
+    except SCIMClientError as scim_exc:
+        message = str(scim_exc)
+        if sys.version_info >= (3, 11) and hasattr(
+            scim_exc, "__notes__"
+        ):  # pragma: no branch
+            for note in scim_exc.__notes__:
+                message = f"{message}\n{note}"
+        raise ClickException(message) from scim_exc
 
     payload = formatted_payload(response.model_dump(), indent)
     click.echo(payload)

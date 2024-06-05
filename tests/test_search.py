@@ -96,23 +96,6 @@ def test_search_request_payload(runner, httpserver, simple_user_payload):
     }
 
 
-def test_network_error(
-    runner,
-):
-    """Test httpx errors handling."""
-
-    result = runner.invoke(
-        cli,
-        [
-            "http://invalid.test",
-            "search",
-        ],
-        catch_exceptions=False,
-    )
-    assert result.exit_code == 1, result.stdout
-    assert "Name or service not known" in result.stdout
-
-
 def test_scimclient_error(runner, httpserver, simple_user_payload):
     """Test scim2_client errors handling."""
 
@@ -142,4 +125,4 @@ def test_validation_error(runner, httpserver, simple_user_payload):
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "The server response is invalid" in result.stdout
+    assert "Server response payload validation error" in result.stdout

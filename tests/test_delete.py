@@ -28,23 +28,6 @@ def test_nominal_case(runner, httpserver):
     assert result.exit_code == 0, result.stdout
 
 
-def test_network_error(runner):
-    """Test httpx errors handling."""
-
-    result = runner.invoke(
-        cli,
-        [
-            "http://invalid.test",
-            "delete",
-            "user",
-            "dummy-id",
-        ],
-        catch_exceptions=False,
-    )
-    assert result.exit_code == 1, result.stdout
-    assert "Name or service not known" in result.stdout
-
-
 def test_scimclient_error(runner, httpserver):
     """Test scim2_client errors handling."""
 

@@ -1,5 +1,6 @@
+import sys
+
 import click
-import httpx
 from click import ClickException
 from scim2_client import SCIMClientError
 from scim2_models import Message
@@ -45,8 +46,14 @@ def delete_cli(ctx, resource_type, id, headers, indent):
             resource_type, id, headers=split_headers(headers)
         )
 
-    except (httpx.HTTPError, SCIMClientError) as exc:
-        raise ClickException(exc) from exc
+    except SCIMClientError as scim_exc:
+        message = str(scim_exc)
+        if sys.version_info >= (3, 11) and hasattr(
+            scim_exc, "__notes__"
+        ):  # pragma: no branch
+            for note in scim_exc.__notes__:
+                message = f"{message}\n{note}"
+        raise ClickException(message) from scim_exc
 
     if response:
         payload = (

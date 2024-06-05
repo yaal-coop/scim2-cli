@@ -1,10 +1,9 @@
+import sys
 from typing import List
 from typing import Optional
 
 import click
-import httpx
 from click import ClickException
-from pydantic import ValidationError
 from scim2_client import SCIMClientError
 from scim2_models import SearchRequest
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
@@ -112,29 +111,22 @@ def query_cli(
         )
 
     try:
-        if resource_type:
-            response = ctx.obj["client"].query(
-                resource_type,
-                id,
-                search_request=payload,
-                check_request_payload=check_request_payload,
-                headers=split_headers(headers),
-            )
+        response = ctx.obj["client"].query(
+            resource_type,
+            id,
+            search_request=payload,
+            check_request_payload=check_request_payload,
+            headers=split_headers(headers),
+        )
 
-        else:
-            response = ctx.obj["client"].query_all(
-                search_request=payload,
-                check_request_payload=check_request_payload,
-                headers=split_headers(headers),
-            )
-
-    except (httpx.HTTPError, SCIMClientError) as exc:
-        raise ClickException(exc) from exc
-
-    except ValidationError as exc:
-        payload = formatted_payload(exc.response_payload, indent)
-        message = f"The server response is invalid:\n{payload}\n{exc}"
-        raise ClickException(message) from exc
+    except SCIMClientError as scim_exc:
+        message = str(scim_exc)
+        if sys.version_info >= (3, 11) and hasattr(
+            scim_exc, "__notes__"
+        ):  # pragma: no branch
+            for note in scim_exc.__notes__:
+                message = f"{message}\n{note}"
+        raise ClickException(message) from scim_exc
 
     payload = formatted_payload(response.model_dump(), indent)
     click.echo(payload)
