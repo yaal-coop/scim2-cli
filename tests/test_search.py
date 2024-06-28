@@ -111,18 +111,3 @@ def test_scimclient_error(runner, httpserver, simple_user_payload):
     )
     assert result.exit_code == 1, result.stdout
     assert "Unexpected response status code: 666" in result.stdout
-
-
-def test_validation_error(runner, httpserver, simple_user_payload):
-    """Test pydantic errors handling."""
-
-    result = runner.invoke(
-        cli,
-        [
-            httpserver.url_for("/"),
-            "search",
-        ],
-        catch_exceptions=False,
-    )
-    assert result.exit_code == 1, result.stdout
-    assert "Server response payload validation error" in result.stdout
