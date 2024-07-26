@@ -7,13 +7,13 @@ from scim2_models import Group
 from scim2_models import User
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
-from .create import create_cli
-from .delete import delete_cli
-from .query import query_cli
-from .replace import replace_cli
-from .search import search_cli
-from .test import test_cli
-from .utils import DOC_URL
+from scim2_cli.create import create_cli
+from scim2_cli.delete import delete_cli
+from scim2_cli.query import query_cli
+from scim2_cli.replace import replace_cli
+from scim2_cli.search import search_cli
+from scim2_cli.test import test_cli
+from scim2_cli.utils import DOC_URL
 
 
 @click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
@@ -46,3 +46,7 @@ cli.add_command(replace_cli)
 cli.add_command(delete_cli)
 cli.add_command(search_cli)
 cli.add_command(test_cli)
+
+
+if __name__ == "__main__":  # pragma: no cover
+    cli()

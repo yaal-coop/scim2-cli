@@ -1,0 +1,26 @@
+---
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['windows-latest', 'ubuntu-latest, 'macos-latest']
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.12
+    - run: pip install pyinstaller
+    - run: pyinstaller --name scim2 --onefile scim2_cli/__init__.py
+    - run: ./dist/scim2
+    - uses: actions/upload-artifact@v4
+      with:
+        name: scim2-${{ github.ref_name }}
+        path: dist/scim2
