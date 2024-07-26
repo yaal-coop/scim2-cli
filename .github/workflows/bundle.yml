@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  bundle:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -38,3 +38,15 @@ jobs:
         name: scim2-${{ github.ref_name }}-${{ matrix.os }}
         path: ./dist/scim2.exe
         if-no-files-found: error
+
+  release:
+    needs: bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: scim2-${{ github.ref_name }}-*
+          path: dist
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
