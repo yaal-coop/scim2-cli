@@ -12,7 +12,7 @@ jobs:
       matrix:
         os:
         - 'windows-latest'
-        - 'ubuntu-latest
+        - 'ubuntu-latest'
         - 'macos-latest'
 
     steps:
