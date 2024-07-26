@@ -27,5 +27,5 @@ jobs:
     - run: ./dist/scim2
     - uses: actions/upload-artifact@v4
       with:
-        name: scim2-${{ vars.GITHUB_REF_NAME }}-${{ vars.RUNNER_OS }}
+        name: scim2-${{ github.ref_name }}-${{ runner.os }}
         path: dist/scim2
