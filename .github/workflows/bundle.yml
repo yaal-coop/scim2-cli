@@ -27,13 +27,13 @@ jobs:
     - run: poetry run pyinstaller --name scim2 --onefile scim2_cli/__init__.py
     - run: ./dist/scim2
     - uses: actions/upload-artifact@v4
-      if: ${{ matrix.os != "windows-latest" }}
+      if: ${{ matrix.os != 'windows-latest' }}
       with:
         name: scim2-${{ github.ref_name }}-${{ matrix.os }}
         path: ./dist/scim2
         if-no-files-found: error
     - uses: actions/upload-artifact@v4
-      if: ${{ matrix.os == "windows-latest" }}
+      if: ${{ matrix.os == 'windows-latest' }}
       with:
         name: scim2-${{ github.ref_name }}-${{ matrix.os }}
         path: ./dist/scim2.exe
