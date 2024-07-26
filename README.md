@@ -15,6 +15,8 @@ It allows users and groups creations, modifications and deletions to be synchron
 pip install scim2-cli
 ```
 
+Binary files are also available on the [releases page](https://github.com/yaal-coop/scim2-cli/releases).
+
 ## Usage
 
 Check the [reference](https://scim2-cli.readthedocs.io/en/latest/reference.html) for more details.
