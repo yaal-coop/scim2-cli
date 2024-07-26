@@ -48,4 +48,7 @@ jobs:
           pattern: scim2-${{ github.ref_name }}-*
       - uses: softprops/action-gh-release@v2
         with:
-          files: scim2-${{ github.ref_name }}-*
+          files: |
+            scim2-${{ github.ref_name }}-windows-latest
+            scim2-${{ github.ref_name }}-ubuntu-latest
+            scim2-${{ github.ref_name }}-macos-latest
