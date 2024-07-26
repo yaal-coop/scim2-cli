@@ -24,19 +24,19 @@ jobs:
     - run: pip install poetry
     - run: poetry install
     - run: poetry run pip install pyinstaller
-    - run: poetry run pyinstaller --name scim2 --onefile scim2_cli/__init__.py
+    - run: poetry run pyinstaller --name scim2-${{ matrix.os }} --onefile scim2_cli/__init__.py
     - run: ./dist/scim2
     - uses: actions/upload-artifact@v4
       if: ${{ matrix.os != 'windows-latest' }}
       with:
         name: scim2-${{ github.ref_name }}-${{ matrix.os }}
-        path: ./dist/scim2
+        path: ./dist/scim2-${{ matrix.os }}
         if-no-files-found: error
     - uses: actions/upload-artifact@v4
       if: ${{ matrix.os == 'windows-latest' }}
       with:
         name: scim2-${{ github.ref_name }}-${{ matrix.os }}
-        path: ./dist/scim2.exe
+        path: ./dist/scim2-${{ matrix.os }}.exe
         if-no-files-found: error
 
   release:
@@ -51,4 +51,4 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files:
-            scim2-${{ github.ref_name }}-*
+            scim2-${{ github.ref_name }}-*/*
