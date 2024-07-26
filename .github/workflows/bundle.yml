@@ -1,4 +1,5 @@
 ---
+name: bundle
 on:
   push:
     tags:
