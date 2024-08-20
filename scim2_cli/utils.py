@@ -1,5 +1,7 @@
 import json
 from enum import Enum
+from typing import Dict
+from typing import List
 
 DOC_URL = "https://scim2-cli.readthedocs.io/"
 INDENTATION_SIZE = 4
@@ -29,7 +31,13 @@ def formatted_payload(obj, indent):
     return json.dumps(obj, indent=indent)
 
 
-def split_headers(headers):
+def split_headers(headers: List[str]) -> Dict[str, str]:
+    """Make a dict from header strings.
+
+    ['Authorization: Bearer token'] → '{"Authorization": "Bearer
+    token"}'
+    """
+
     return {
         header[: header.index(":")].strip(): header[header.index(":") + 1 :].strip()
         for header in headers
