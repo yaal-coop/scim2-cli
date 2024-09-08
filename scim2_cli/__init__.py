@@ -47,6 +47,5 @@ cli.add_command(delete_cli)
 cli.add_command(search_cli)
 cli.add_command(test_cli)
 
-
 if __name__ == "__main__":  # pragma: no cover
     cli()

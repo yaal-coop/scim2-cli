@@ -1,6 +1,13 @@
 Changelog
 =========
 
+[0.2.0] - Unreleased
+--------------------
+
+Fixed
+^^^^^
+- Dynamic command parameters for ``create`` and ``replace``.
+
 [0.1.4] - 2024-07-26
 --------------------
 
