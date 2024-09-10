@@ -3,6 +3,7 @@ import sys
 import click
 from click import ClickException
 from pydanclick import from_pydantic
+from scim2_client import SCIMClient
 from scim2_client import SCIMClientError
 from scim2_models import Context
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
@@ -14,7 +15,7 @@ from .utils import split_headers
 from .utils import unacceptable_fields
 
 
-def create_payload(client, payload, indent, headers):
+def create_payload(client: SCIMClient, payload, indent, headers):
     try:
         response = client.create(
             payload, headers=split_headers(headers), raise_scim_errors=False

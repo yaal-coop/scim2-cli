@@ -4,6 +4,11 @@ Changelog
 [0.2.0] - Unreleased
 --------------------
 
+Added
+^^^^^
+
+- :class:`~scim2_models.EnterpriseUser` support. #9
+
 Fixed
 ^^^^^
 - Dynamic command parameters for ``create`` and ``replace``.
