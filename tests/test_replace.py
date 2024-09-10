@@ -150,7 +150,10 @@ def test_no_command_validation_error(runner, httpserver, simple_user_payload):
         input=json.dumps(payload),
     )
     assert result.exit_code == 1, result.stdout
-    assert "Expected type User but got undefined object with no schema" in result.stdout
+    assert (
+        "Expected type User[EnterpriseUser] but got undefined object with no schema"
+        in result.stdout
+    )
 
 
 def test_command_stdin(runner, httpserver, simple_user_payload):
@@ -301,4 +304,7 @@ def test_command_validation_error(runner, httpserver, simple_user_payload):
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Expected type User but got undefined object with no schema" in result.stdout
+    assert (
+        "Expected type User[EnterpriseUser] but got undefined object with no schema"
+        in result.stdout
+    )

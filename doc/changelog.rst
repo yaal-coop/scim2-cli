@@ -7,6 +7,7 @@ Changelog
 Added
 ^^^^^
 - Python 3.13 support.
+- :class:`~scim2_models.EnterpriseUser` support. #9
 
 Fixed
 ^^^^^

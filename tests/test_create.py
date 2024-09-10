@@ -125,7 +125,10 @@ def test_no_command_validation_error(runner, httpserver, simple_user_payload):
         input=json.dumps(payload),
     )
     assert result.exit_code == 1, result.stdout
-    assert "Expected type User but got undefined object with no schema" in result.stdout
+    assert (
+        "Expected type User[EnterpriseUser] but got undefined object with no schema"
+        in result.stdout
+    )
 
 
 def test_command_stdin(runner, httpserver, simple_user_payload):
@@ -183,6 +186,34 @@ def test_command_parameters(runner, httpserver, simple_user_payload):
     assert json_output == response_payload
 
 
+def test_command_parameters_extension(runner, httpserver, enterprise_user_payload):
+    """Test that model extensions parameters."""
+    response_payload = enterprise_user_payload("new-user")
+    httpserver.expect_request("/Users", method="POST").respond_with_json(
+        response_payload,
+        status=201,
+        content_type="application/scim+json",
+    )
+
+    result = runner.invoke(
+        cli,
+        [
+            httpserver.url_for("/"),
+            "create",
+            "user",
+            "--user-name",
+            "new-user@example.com",
+            "--enterpriseuser-employee-number",
+            "12345",
+        ],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 0, result.stdout
+    json_output = json.loads(result.output)
+
+    assert json_output == response_payload
+
+
 def test_command_no_stdin_no_parameters(runner, httpserver, simple_user_payload):
     """No parameter nor stdin should display the help."""
     result = runner.invoke(
@@ -218,4 +249,7 @@ def test_command_validation_error(runner, httpserver, simple_user_payload):
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Expected type User but got undefined object with no schema" in result.stdout
+    assert (
+        "Expected type User[EnterpriseUser] but got undefined object with no schema"
+        in result.stdout
+    )

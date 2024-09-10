@@ -113,6 +113,7 @@ def test_all(runner, httpserver, simple_user_payload):
                 },
                 "schemas": [
                     "urn:ietf:params:scim:schemas:core:2.0:User",
+                    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
                 ],
                 "userName": "all@example.com",
             },
@@ -268,4 +269,7 @@ def test_validation_error(runner, httpserver, simple_user_payload):
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Expected type User but got undefined object with no schema" in result.stdout
+    assert (
+        "Expected type User[EnterpriseUser] but got undefined object with no schema"
+        in result.stdout
+    )

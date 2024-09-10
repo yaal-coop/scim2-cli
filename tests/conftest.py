@@ -81,7 +81,10 @@ def httpserver(httpserver):
 def simple_user_payload(httpserver):
     def wrapped(id):
         return {
-            "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
+            "schemas": [
+                "urn:ietf:params:scim:schemas:core:2.0:User",
+                "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+            ],
             "id": id,
             "userName": f"{id}@example.com",
             "meta": {
@@ -90,6 +93,31 @@ def simple_user_payload(httpserver):
                 "lastModified": "2011-05-13T04:42:34Z",
                 "version": 'W\\/"3694e05e9dff590"',
                 "location": f"http://localhost:{httpserver.port}/Users/{id}",
+            },
+        }
+
+    return wrapped
+
+
+@pytest.fixture
+def enterprise_user_payload(httpserver):
+    def wrapped(id):
+        return {
+            "schemas": [
+                "urn:ietf:params:scim:schemas:core:2.0:User",
+                "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User",
+            ],
+            "id": id,
+            "userName": f"{id}@example.com",
+            "meta": {
+                "resourceType": "User",
+                "created": "2010-01-23T04:56:22Z",
+                "lastModified": "2011-05-13T04:42:34Z",
+                "version": 'W\\/"3694e05e9dff590"',
+                "location": f"http://localhost:{httpserver.port}/Users/{id}",
+            },
+            "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+                "employeeNumber": "12345",
             },
         }
 
