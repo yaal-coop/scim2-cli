@@ -117,6 +117,7 @@ def query_cli(
             search_request=payload,
             check_request_payload=check_request_payload,
             headers=split_headers(headers),
+            raise_scim_errors=False,
         )
 
     except SCIMClientError as scim_exc:

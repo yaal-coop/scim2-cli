@@ -16,7 +16,9 @@ from .utils import unacceptable_fields
 
 def create_payload(client, payload, indent, headers):
     try:
-        response = client.create(payload, headers=split_headers(headers))
+        response = client.create(
+            payload, headers=split_headers(headers), raise_scim_errors=False
+        )
 
     except SCIMClientError as scim_exc:
         message = str(scim_exc)

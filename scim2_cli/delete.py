@@ -43,7 +43,7 @@ def delete_cli(ctx, resource_type, id, headers, indent):
 
     try:
         response = ctx.obj["client"].delete(
-            resource_type, id, headers=split_headers(headers)
+            resource_type, id, headers=split_headers(headers), raise_scim_errors=False
         )
 
     except SCIMClientError as scim_exc:
