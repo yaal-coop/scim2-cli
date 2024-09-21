@@ -11,11 +11,41 @@ It allows users and groups creations, modifications and deletions to be synchron
 
 ## Installation
 
+### Binary files
+
+Binary files are available on the [releases page](https://github.com/yaal-coop/scim2-cli/releases).
+
+### Python package
+
+scim2-cli is published on the [PyPI repository](https://pypi.org/project/scim2-cli).
+You can install it with your favourite python package manager.
+
 ```shell
 pip install scim2-cli
 ```
 
-Binary files are also available on the [releases page](https://github.com/yaal-coop/scim2-cli/releases).
+### From sources
+
+To run scim2-cli from the sources, [Poetry is needed](https://python-poetry.org/docs/#installation) for development:
+
+```shell
+git clone https://github.com/yaal-coop/scim2-cli.git
+cd scim2-cli
+poetry install
+```
+
+Then, it can be launched directly as a Python script:
+
+```shell
+poetry run scim2 --help
+```
+
+Or you can build a single file binary from the sources:
+
+```shell
+poetry run pyinstaller --name scim2 --onefile scim2_cli/__init__.py
+./dist/scim2 --help
+```
 
 ## Usage
 

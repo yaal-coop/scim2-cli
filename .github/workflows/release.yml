@@ -44,7 +44,6 @@ jobs:
         python-version: 3.12
     - run: pip install poetry
     - run: poetry install
-    - run: poetry run pip install pyinstaller
     - run: poetry run pyinstaller --name scim2-${{ matrix.os }} --onefile scim2_cli/__init__.py
     - run: ./dist/scim2-${{ matrix.os }}
     - uses: actions/upload-artifact@v4
