@@ -13,10 +13,10 @@ keywords = ["scim", "scim2", "provisioning", "rfc7643", "rfc7644"]
 classifiers = [
     "Intended Audience :: Developers",
     "Development Status :: 3 - Alpha",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "License :: OSI Approved :: MIT License",
     "Environment :: Web Environment",
@@ -100,6 +100,7 @@ envlist =
     py310
     py311
     py312
+    py313
     doc
     coverage
     binaries

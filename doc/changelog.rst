@@ -4,6 +4,10 @@ Changelog
 [0.2.0] - Unreleased
 --------------------
 
+Added
+^^^^^
+- Python 3.13 support.
+
 Fixed
 ^^^^^
 - Dynamic command parameters for ``create`` and ``replace``.
