@@ -58,7 +58,7 @@ def delete_cli(ctx, resource_type, id, headers, indent):
     if response:
         payload = (
             response.model_dump()
-            if isinstance(response, (Resource, Message))
+            if isinstance(response, Resource | Message)
             else response
         )
         payload = formatted_payload(payload, indent)
