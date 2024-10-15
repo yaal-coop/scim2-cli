@@ -1,7 +1,5 @@
 import json
 from enum import Enum
-from typing import Dict
-from typing import List
 
 import click
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
@@ -34,7 +32,7 @@ def formatted_payload(obj, indent):
     return json.dumps(obj, indent=indent)
 
 
-def split_headers(headers: List[str]) -> Dict[str, str]:
+def split_headers(headers: list[str]) -> dict[str, str]:
     """Make a dict from header strings.
 
     ['Authorization: Bearer token'] → '{"Authorization": "Bearer

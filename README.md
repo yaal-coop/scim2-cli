@@ -26,24 +26,24 @@ pip install scim2-cli
 
 ### From sources
 
-To run scim2-cli from the sources, [Poetry is needed](https://python-poetry.org/docs/#installation) for development:
+To run scim2-cli from the sources, [uv is needed](https://docs.astral.sh/uv/getting-started/installation/) for development:
 
 ```shell
 git clone https://github.com/yaal-coop/scim2-cli.git
 cd scim2-cli
-poetry install
+uv sync
 ```
 
 Then, it can be launched directly as a Python script:
 
 ```shell
-poetry run scim2 --help
+uv run scim2 --help
 ```
 
 Or you can build a single file binary from the sources:
 
 ```shell
-poetry run pyinstaller --name scim2 --onefile scim2_cli/__init__.py
+uv run pyinstaller --name scim2 --onefile scim2_cli/__init__.py
 ./dist/scim2 --help
 ```
 

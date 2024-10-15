@@ -12,14 +12,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: 3.12
-          cache: 'poetry'
+          enable-cache: true
       - name: build dist
-        run: poetry build
+        run: uv build
       - uses: actions/upload-artifact@v4
         with:
           name: artifacts
@@ -39,12 +37,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
       with:
-        python-version: 3.12
-    - run: pip install poetry
-    - run: poetry install
-    - run: poetry run pyinstaller --name scim2-${{ matrix.os }} --onefile scim2_cli/__init__.py
+        enable-cache: true
+    - run: uv run pyinstaller --name scim2-${{ matrix.os }} --onefile scim2_cli/__init__.py
     - run: ./dist/scim2-${{ matrix.os }}
     - uses: actions/upload-artifact@v4
       if: ${{ matrix.os != 'windows-latest' }}

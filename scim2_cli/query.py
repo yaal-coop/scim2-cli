@@ -1,6 +1,4 @@
 import sys
-from typing import List
-from typing import Optional
 
 import click
 from click import ClickException
@@ -59,16 +57,16 @@ from .utils import split_headers
 )
 def query_cli(
     ctx,
-    resource_type: Optional[str],
-    id: Optional[str],
-    attribute: List[str],
-    excluded_attribute: List[str],
+    resource_type: str | None,
+    id: str | None,
+    attribute: list[str],
+    excluded_attribute: list[str],
     start_index: int,
     count: int,
     filter: str,
     sort_by: str,
     sort_order: str,
-    headers: List[str],
+    headers: list[str],
     indent: bool,
 ):
     """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request
