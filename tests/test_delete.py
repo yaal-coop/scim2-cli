@@ -5,7 +5,6 @@ from scim2_cli import cli
 
 def test_nominal_case(runner, httpserver):
     """Test deletion nominal case."""
-
     httpserver.expect_request(
         "/Users/ok",
         method="DELETE",
@@ -30,7 +29,6 @@ def test_nominal_case(runner, httpserver):
 
 def test_scimclient_error(runner, httpserver):
     """Test scim2_client errors handling."""
-
     httpserver.expect_request(
         "/Users/dummy-id",
         method="DELETE",
@@ -56,7 +54,6 @@ def test_scimclient_error(runner, httpserver):
 
 def test_bad_resource_type(runner, httpserver):
     """Test passing an unknown resource type."""
-
     result = runner.invoke(
         cli,
         [
@@ -73,7 +70,6 @@ def test_bad_resource_type(runner, httpserver):
 
 def test_not_found(runner, httpserver):
     """Test pydantic errors handling."""
-
     httpserver.expect_request(
         "/Users/unknown-id",
         method="DELETE",

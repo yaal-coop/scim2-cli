@@ -53,8 +53,7 @@ def replace_factory(model):
     @from_pydantic("obj", model, exclude=exclude)
     @click.pass_context
     def replace_command(ctx, indent, headers, obj: model, *args, **kwargs):
-        """Perform a `SCIM PUT <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request
-        on resources endpoint.
+        r"""Perform a `SCIM PUT <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request on resources endpoint.
 
         Input data can be passed through parameters like :code:`--external-id`.
 
@@ -76,8 +75,8 @@ def replace_factory(model):
         .. code-block:: bash
 
             echo '{"id": "xxxx-yyyy", "userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' | scim https://scim.example replace user
-        """
 
+        """
         if obj == model():
             obj = None
 
@@ -108,8 +107,7 @@ def replace_factory(model):
     help="Indent JSON response payloads.",
 )
 def replace_cli(ctx, headers, indent):
-    """Perform a `SCIM PUT <https://www.rfc-editor.org/rfc/rfc7644#section-3.5.1>`_ request
-    on the resources endpoint.
+    """Perform a `SCIM PUT <https://www.rfc-editor.org/rfc/rfc7644#section-3.5.1>`_ request on the resources endpoint.
 
     There are subcommands for all the available models, with dynamic attributes.
     See the attributes for :code:`user` with:

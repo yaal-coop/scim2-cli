@@ -9,7 +9,6 @@ def test_help(runner):
 
 def test_stdin_bad_json(runner, httpserver):
     """Test that invalid JSON stdin raise an error."""
-
     result = runner.invoke(
         cli,
         [httpserver.url_for("/"), "query", "user"],

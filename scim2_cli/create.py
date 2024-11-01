@@ -52,8 +52,7 @@ def create_factory(model):
     @from_pydantic("obj", model, exclude=exclude)
     @click.pass_context
     def create_command(ctx, indent, headers, obj: model, *args, **kwargs):
-        """Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request
-        on resources endpoint.
+        r"""Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request on resources endpoint.
 
         Input data can be passed through parameters like :code:`--external-id`.
 
@@ -74,8 +73,8 @@ def create_factory(model):
         .. code-block:: bash
 
             echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' | scim https://scim.example create user
-        """
 
+        """
         if obj == model():
             obj = None
 
@@ -106,8 +105,7 @@ def create_factory(model):
     "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
 )
 def create_cli(ctx, indent, headers):
-    """Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request
-    on resources endpoint.
+    """Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request on resources endpoint.
 
     There are subcommands for all the available models, with dynamic attributes.
     See the attributes for :code:`user` with:
@@ -121,8 +119,8 @@ def create_cli(ctx, indent, headers):
     .. code-block:: bash
 
         echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' | scim https://scim.example create
-    """
 
+    """
     if ctx.invoked_subcommand is not None:
         return
 

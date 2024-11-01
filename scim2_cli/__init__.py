@@ -21,7 +21,6 @@ from scim2_cli.utils import DOC_URL
 @click.pass_context
 def cli(ctx, url):
     """SCIM application development CLI."""
-
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
     client = Client(base_url=ctx.obj["URL"])

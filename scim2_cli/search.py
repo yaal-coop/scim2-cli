@@ -65,16 +65,15 @@ def search_cli(
     headers: list[str],
     indent: bool,
 ):
-    """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request
-    on the :code:`/.search` endpoint.
+    """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request on the :code:`/.search` endpoint.
 
     Data passed in JSON format to stdin is sent as request arguments and all the other query arguments are ignored:
 
     .. code-block:: bash
 
         echo '{"startIndex": 50, "count": 10}' | scim https://scim.example search user
-    """
 
+    """
     if ctx.obj.get("stdin"):
         check_request_payload = False
         payload = ctx.obj.get("stdin")

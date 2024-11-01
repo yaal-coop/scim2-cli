@@ -35,10 +35,8 @@ def formatted_payload(obj, indent):
 def split_headers(headers: list[str]) -> dict[str, str]:
     """Make a dict from header strings.
 
-    ['Authorization: Bearer token'] → '{"Authorization": "Bearer
-    token"}'
+    ['Authorization: Bearer token'] → '{"Authorization": "Bearer token"}'
     """
-
     return {
         header[: header.index(":")].strip(): header[header.index(":") + 1 :].strip()
         for header in headers
@@ -67,9 +65,7 @@ class ModelCommand(RSTCommand):
 
 
 def is_field_acceptable(context, model, field_name) -> bool:
-    """Indicate whether a field is acceptable as part of a SCIM payload for a
-    given context."""
-
+    """Indicate whether a field is acceptable as part of a SCIM payload for a given context."""
     from scim2_models import Context
     from scim2_models import Mutability
 

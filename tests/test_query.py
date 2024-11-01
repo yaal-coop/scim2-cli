@@ -88,7 +88,6 @@ def httpserver(httpserver, simple_user_payload):
 
 def test_all(runner, httpserver, simple_user_payload):
     """Test passing no resource and no id."""
-
     result = runner.invoke(
         cli,
         [
@@ -128,7 +127,6 @@ def test_all(runner, httpserver, simple_user_payload):
 
 def test_get_by_id(runner, httpserver, simple_user_payload):
     """Test passing a resource and an id."""
-
     result = runner.invoke(
         cli,
         [
@@ -147,7 +145,6 @@ def test_get_by_id(runner, httpserver, simple_user_payload):
 
 def test_get_resources_without_id(runner, httpserver, simple_user_payload):
     """Test passing a resource and no id."""
-
     result = runner.invoke(
         cli,
         [
@@ -171,7 +168,6 @@ def test_get_resources_without_id(runner, httpserver, simple_user_payload):
 
 def test_stdin(runner, httpserver, simple_user_payload):
     """Test that JSON stdin is passed in the GET request."""
-
     payload = {"attributes": "userName"}
     result = runner.invoke(
         cli,
@@ -187,7 +183,6 @@ def test_stdin(runner, httpserver, simple_user_payload):
 
 def test_search_request_payload(runner, httpserver, simple_user_payload):
     """Test that most of the arguments are passed in the payload."""
-
     result = runner.invoke(
         cli,
         [
@@ -227,7 +222,6 @@ def test_unknown_resource_type(
     httpserver,
 ):
     """Test passing an unkwnown resource type."""
-
     result = runner.invoke(
         cli,
         [
@@ -244,7 +238,6 @@ def test_unknown_resource_type(
 
 def test_scimclient_error(runner, httpserver, simple_user_payload):
     """Test scim2_client errors handling."""
-
     result = runner.invoke(
         cli,
         [
@@ -261,7 +254,6 @@ def test_scimclient_error(runner, httpserver, simple_user_payload):
 
 def test_validation_error(runner, httpserver, simple_user_payload):
     """Test pydantic errors handling."""
-
     result = runner.invoke(
         cli,
         [

@@ -8,7 +8,6 @@ from scim2_cli import cli
 
 def test_nominal(runner, httpserver):
     """Test SCIM compliance test."""
-
     results = [
         CheckResult(
             status=Status.SUCCESS,
@@ -42,7 +41,6 @@ ERROR test2
 
 def test_verbose(runner, httpserver):
     """Test SCIM compliance test."""
-
     results = [
         CheckResult(
             status=Status.SUCCESS,

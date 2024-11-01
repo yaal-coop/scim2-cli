@@ -35,7 +35,6 @@ def httpserver(httpserver, simple_user_payload):
 
 def test_stdin(runner, httpserver, simple_user_payload):
     """Test that JSON stdin is passed in the GET request."""
-
     payload = {"count": 99, "startIndex": 99}
     result = runner.invoke(
         cli,
@@ -57,7 +56,6 @@ def test_stdin(runner, httpserver, simple_user_payload):
 
 def test_search_request_payload(runner, httpserver, simple_user_payload):
     """Test that most of the arguments are passed in the payload."""
-
     result = runner.invoke(
         cli,
         [
@@ -98,7 +96,6 @@ def test_search_request_payload(runner, httpserver, simple_user_payload):
 
 def test_scimclient_error(runner, httpserver, simple_user_payload):
     """Test scim2_client errors handling."""
-
     result = runner.invoke(
         cli,
         [

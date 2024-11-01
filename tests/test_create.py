@@ -5,7 +5,6 @@ from scim2_cli import cli
 
 def test_no_command_stdin(runner, httpserver, simple_user_payload):
     """Test that JSON stdin is passed in the POST request."""
-
     response_payload = simple_user_payload("new-user")
     httpserver.expect_request("/Users", method="POST").respond_with_json(
         response_payload,
@@ -34,7 +33,6 @@ def test_no_command_stdin(runner, httpserver, simple_user_payload):
 
 def test_no_command_no_stdin(runner, httpserver, simple_user_payload):
     """Test missing stdin."""
-
     result = runner.invoke(
         cli,
         [httpserver.url_for("/"), "create"],
@@ -46,7 +44,6 @@ def test_no_command_no_stdin(runner, httpserver, simple_user_payload):
 
 def test_no_command_scimclient_error(runner, httpserver, simple_user_payload):
     """Test scim2_client errors handling."""
-
     httpserver.expect_request(
         "/Users",
         method="POST",
@@ -78,7 +75,6 @@ def test_no_command_scimclient_error(runner, httpserver, simple_user_payload):
 
 def test_no_command_validation_error(runner, httpserver, simple_user_payload):
     """Test pydantic errors handling."""
-
     httpserver.expect_request(
         "/Users",
         method="POST",
@@ -110,7 +106,6 @@ def test_no_command_validation_error(runner, httpserver, simple_user_payload):
 
 def test_command_stdin(runner, httpserver, simple_user_payload):
     """Test that JSON stdin is passed in the POST request."""
-
     response_payload = simple_user_payload("new-user")
     httpserver.expect_request("/Users", method="POST").respond_with_json(
         response_payload,
@@ -139,7 +134,6 @@ def test_command_stdin(runner, httpserver, simple_user_payload):
 
 def test_command_parameters(runner, httpserver, simple_user_payload):
     """Test that parameters are passed in the POST request."""
-
     response_payload = simple_user_payload("new-user")
     httpserver.expect_request("/Users", method="POST").respond_with_json(
         response_payload,
@@ -166,7 +160,6 @@ def test_command_parameters(runner, httpserver, simple_user_payload):
 
 def test_command_no_stdin_no_parameters(runner, httpserver, simple_user_payload):
     """No parameter nor stdin should display the help."""
-
     result = runner.invoke(
         cli,
         [httpserver.url_for("/"), "create", "user"],
@@ -178,7 +171,6 @@ def test_command_no_stdin_no_parameters(runner, httpserver, simple_user_payload)
 
 def test_command_validation_error(runner, httpserver, simple_user_payload):
     """Test pydantic errors handling."""
-
     httpserver.expect_request(
         "/Users",
         method="POST",

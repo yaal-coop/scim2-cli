@@ -15,14 +15,12 @@ from .utils import split_headers
 )
 @click.option("-v", "--verbose", is_flag=True, help="Enables verbose mode")
 def test_cli(ctx, headers, verbose):
-    """Perform a server SCIM compliance check using :doc:`scim2-tester
-    <scim2-tester:index>`.
+    """Perform a server SCIM compliance check using :doc:`scim2-tester <scim2-tester:index>`.
 
     .. code-block:: bash
 
         scim https://scim.example test
     """
-
     client = ctx.obj["client"]
     client.client.headers.update(split_headers(headers))
     results = check_server(client)

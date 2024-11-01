@@ -32,7 +32,6 @@ def delete_cli(ctx, resource_type, id, headers, indent):
 
         scim https://scim.example delete user 1234
     """
-
     try:
         resource_type = ctx.obj["resource_types"][resource_type]
     except KeyError:

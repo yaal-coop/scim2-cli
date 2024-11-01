@@ -69,8 +69,7 @@ def query_cli(
     headers: list[str],
     indent: bool,
 ):
-    """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request
-    on the :code:`RESOURCE_TYPE` endpoint.
+    """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request on the :code:`RESOURCE_TYPE` endpoint.
 
     - If :code:`RESOURCE_TYPE` is :code:`user` and :code:`id` is `1234`, then the request will made on the :code:`/Users/1234` endpoint.
     - If :code:`RESOURCE_TYPE` is :code:`user` and :code:`id` is not set, then the request will made on the :code:`/Users` endpoint.
@@ -81,8 +80,8 @@ def query_cli(
     .. code-block:: bash
 
         echo '{"startIndex": 50, "count": 10}' | scim https://scim.example query user
-    """
 
+    """
     if resource_type:
         try:
             resource_type = ctx.obj["resource_types"][resource_type]
