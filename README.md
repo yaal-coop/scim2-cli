@@ -13,7 +13,7 @@ It allows users and groups creations, modifications and deletions to be synchron
 
 ### Binary files
 
-Binary files are available on the [releases page](https://github.com/yaal-coop/scim2-cli/releases).
+Binary files are available on the [releases page](https://github.com/python-scim/scim2-cli/releases).
 
 ### Python package
 
@@ -29,7 +29,7 @@ pip install scim2-cli
 To run scim2-cli from the sources, [uv is needed](https://docs.astral.sh/uv/getting-started/installation/) for development:
 
 ```shell
-git clone https://github.com/yaal-coop/scim2-cli.git
+git clone https://github.com/python-scim/scim2-cli.git
 cd scim2-cli
 uv sync
 ```
@@ -89,6 +89,6 @@ $ scim2 https://auth.example --header "Authorization: Bearer 12345" query user 2
 ```
 
 scim2-cli belongs in a collection of SCIM tools developed by [Yaal Coop](https://yaal.coop),
-with [scim2-models](https://github.com/yaal-coop/scim2-models),
-[scim2-client](https://github.com/yaal-coop/scim2-client) and
-[scim2-tester](https://github.com/yaal-coop/scim2-tester)
+with [scim2-models](https://github.com/python-scim/scim2-models),
+[scim2-client](https://github.com/python-scim/scim2-client) and
+[scim2-tester](https://github.com/python-scim/scim2-tester)

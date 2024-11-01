@@ -3,13 +3,13 @@ Contribution
 
 Contributions are welcome!
 
-The repository is hosted at `github.com/yaal-coop/scim2-cli <https://github.com/yaal-coop/scim2-cli>`_.
+The repository is hosted at `github.com/python-scim/scim2-cli <https://github.com/python-scim/scim2-cli>`_.
 
 Discuss
 -------
 
 If you want to implement a feature or a bugfix, please start by discussing it with us on
-the `bugtracker <https://github.com/yaal-coop/scim2-cli/issues>`_.
+the `bugtracker <https://github.com/python-scim/scim2-cli/issues>`_.
 
 Unit tests
 ----------
