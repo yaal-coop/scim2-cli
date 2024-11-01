@@ -17,6 +17,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinx_click",
+    "sphinx_issues",
 ]
 
 templates_path = ["_templates"]
@@ -79,3 +80,7 @@ texinfo_documents = [
         "Miscellaneous",
     )
 ]
+
+# -- Options for sphinx-issues -------------------------------------
+
+issues_github_path = "python-scim/scim2-cli"

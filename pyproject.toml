@@ -51,6 +51,7 @@ doc = [
     "shibuya>=2024.5.15",
     "sphinx>=7.3.7",
     "sphinx-click>=6.0.0",
+    "sphinx-issues >= 5.0.0",
     "myst-parser>=3.0.1",
 ]
 

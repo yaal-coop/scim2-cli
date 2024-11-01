@@ -854,6 +854,7 @@ doc = [
     { name = "shibuya" },
     { name = "sphinx" },
     { name = "sphinx-click" },
+    { name = "sphinx-issues" },
 ]
 
 [package.metadata]
@@ -878,6 +879,7 @@ doc = [
     { name = "shibuya", specifier = ">=2024.5.15" },
     { name = "sphinx", specifier = ">=7.3.7" },
     { name = "sphinx-click", specifier = ">=6.0.0" },
+    { name = "sphinx-issues", specifier = ">=5.0.0" },
 ]
 
 [[package]]
@@ -1010,6 +1012,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b6/88/d5bcfb2a509c2df2b8f2da593dd211e69489556ed9ffe84eecf4821f9bc6/sphinx_click_rst_to_ansi_formatter-0.1.4.tar.gz", hash = "sha256:af6693ace67ec14be867e4a26049d4f77872d1f234879b88fd94a38769de3801", size = 9194 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2a/c8/be118ba31b2627426883b409f9dc8057bb0b2e200cc1976f16a403ddd17d/sphinx_click_rst_to_ansi_formatter-0.1.4-py3-none-any.whl", hash = "sha256:440086509360cd0fdb942b13a79a689654ae35133c22552f05398ffd4bd634e4", size = 10494 },
+]
+
+[[package]]
+name = "sphinx-issues"
+version = "5.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "sphinx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ab/2b/5bc6fac05eba113665f18d4ebe3c1180d1ce3e7b6fd6823835dbec48dd4e/sphinx_issues-5.0.0.tar.gz", hash = "sha256:192e43cf071ed7aead401cd14fd15076ecb0866238c095d672180618740c6bae", size = 14021 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1d/14/a1b38212db8d327f53f2f56f0ed81c8b80ee2c2160e8819069c0d329d0a9/sphinx_issues-5.0.0-py3-none-any.whl", hash = "sha256:d80704a01c8af3d76586771a67a9e48f2d1a6091a0377458c49908460a6a31ea", size = 8063 },
 ]
 
 [[package]]
