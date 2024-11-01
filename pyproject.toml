@@ -39,19 +39,23 @@ repository = "https://github.com/yaal-coop/scim2-cli"
 changelog = "https://scim2-cli.readthedocs.io/en/latest/changelog.html"
 funding = "https://github.com/sponsors/yaal-coop"
 
-[tool.uv]
-dev-dependencies = [
-# development
-    "pyinstaller>=6.10.0",
+[dependency-groups]
+dev = [
     "pytest>=8.2.1",
     "pytest-coverage>=0.0",
     "pytest-httpserver>=1.0.10",
-    "tox-uv>=1.15.0",
-# documentation
+    "tox-uv>=1.16.0",
+]
+
+doc = [
     "shibuya>=2024.5.15",
     "sphinx>=7.3.7",
     "sphinx-click>=6.0.0",
     "myst-parser>=3.0.1",
+]
+
+bundle = [
+    "pyinstaller>=6.10.0",
 ]
 
 [project.scripts]
@@ -107,6 +111,7 @@ env_list = [
 ]
 
 [tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
 commands = [
     ["pytest", "--showlocals", "--full-trace", "{posargs}"],
 ]

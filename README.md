@@ -43,6 +43,7 @@ uv run scim2 --help
 Or you can build a single file binary from the sources:
 
 ```shell
+uv sync --group bundle
 uv run pyinstaller --name scim2 --onefile scim2_cli/__init__.py
 ./dist/scim2 --help
 ```

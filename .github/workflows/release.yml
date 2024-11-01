@@ -41,6 +41,8 @@ jobs:
       uses: astral-sh/setup-uv@v3
       with:
         enable-cache: true
+    - name: Install dependencies
+      run: uv sync --group bundle
     - run: uv run pyinstaller --name scim2-${{ matrix.os }} --onefile scim2_cli/__init__.py
     - run: ./dist/scim2-${{ matrix.os }}
     - uses: actions/upload-artifact@v4
