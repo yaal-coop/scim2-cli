@@ -34,11 +34,11 @@ def delete_cli(ctx, resource_type, id, headers, indent):
     """
     try:
         resource_type = ctx.obj["resource_types"][resource_type]
-    except KeyError:
+    except KeyError as exc:
         ok_values = ", ".join(ctx.obj["resource_types"])
         raise ClickException(
             f"Unknown resource type '{resource_type}'. Available values are: {ok_values}'"
-        )
+        ) from exc
 
     try:
         response = ctx.obj["client"].delete(
