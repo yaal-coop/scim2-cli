@@ -58,7 +58,7 @@ def httpserver(httpserver, simple_user_payload):
 
     httpserver.expect_request(
         "/Users/full-qs",
-        query_string="attributes=userName&attributes=displayName&excludedAttributes=timezone&excludedAttributes=phoneNumbers&filter=userName%20Eq%20%22john%22&sortBy=userName&sortOrder=ascending&startIndex=1&count=10",
+        query_string="attributes=userName&attributes=displayName&filter=userName%20Eq%20%22john%22&sortBy=userName&sortOrder=ascending&startIndex=1&count=10",
         method="GET",
     ).respond_with_json(
         simple_user_payload("full-qs"),
@@ -194,10 +194,6 @@ def test_search_request_payload(runner, httpserver, simple_user_payload):
             "userName",
             "--attribute",
             "displayName",
-            "--excluded-attribute",
-            "timezone",
-            "--excluded-attribute",
-            "phoneNumbers",
             "--filter",
             'userName Eq "john"',
             "--sort-by",
