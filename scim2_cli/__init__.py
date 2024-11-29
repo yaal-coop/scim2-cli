@@ -2,7 +2,7 @@ import json
 
 import click
 from httpx import Client
-from scim2_client import SCIMClient
+from scim2_client.engines.httpx import SyncSCIMClient
 from scim2_models import Group
 from scim2_models import User
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
@@ -24,10 +24,10 @@ def cli(ctx, url):
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
     client = Client(base_url=ctx.obj["URL"])
-    ctx.obj["client"] = SCIMClient(client, resource_types=(User, Group))
-    ctx.obj["resource_types"] = {
-        resource_type.__name__.lower(): resource_type
-        for resource_type in ctx.obj["client"].resource_types
+    ctx.obj["client"] = SyncSCIMClient(client, resource_models=(User, Group))
+    ctx.obj["resource_models"] = {
+        resource_model.__name__.lower(): resource_model
+        for resource_model in ctx.obj["client"].resource_models
     }
 
     if not click.get_text_stream("stdin").isatty():  # pragma: no cover

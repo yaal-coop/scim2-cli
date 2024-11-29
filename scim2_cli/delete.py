@@ -33,16 +33,16 @@ def delete_cli(ctx, resource_type, id, headers, indent):
         scim https://scim.example delete user 1234
     """
     try:
-        resource_type = ctx.obj["resource_types"][resource_type]
+        resource_model = ctx.obj["resource_models"][resource_type]
     except KeyError as exc:
-        ok_values = ", ".join(ctx.obj["resource_types"])
+        ok_values = ", ".join(ctx.obj["resource_models"])
         raise ClickException(
             f"Unknown resource type '{resource_type}'. Available values are: {ok_values}'"
         ) from exc
 
     try:
         response = ctx.obj["client"].delete(
-            resource_type, id, headers=split_headers(headers), raise_scim_errors=False
+            resource_model, id, headers=split_headers(headers), raise_scim_errors=False
         )
 
     except SCIMClientError as scim_exc:

@@ -84,9 +84,9 @@ def query_cli(
     """
     if resource_type:
         try:
-            resource_type = ctx.obj["resource_types"][resource_type]
+            resource_type = ctx.obj["resource_models"][resource_type]
         except KeyError as exc:
-            ok_values = ", ".join(ctx.obj["resource_types"])
+            ok_values = ", ".join(ctx.obj["resource_models"])
             raise ClickException(
                 f"Unknown resource type '{resource_type}. Available values are: {ok_values}'"
             ) from exc

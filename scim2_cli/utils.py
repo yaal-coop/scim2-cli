@@ -56,11 +56,11 @@ class ModelCommand(RSTCommand):
     def list_commands(self, ctx):
         ctx.ensure_object(dict)
         base = super().list_commands(ctx)
-        lazy = sorted(ctx.obj.get("resource_types", {}).keys())
+        lazy = sorted(ctx.obj.get("resource_models", {}).keys())
         return base + lazy
 
     def get_command(self, ctx, cmd_name):
-        model = ctx.obj["resource_types"].get(cmd_name)
+        model = ctx.obj["resource_models"].get(cmd_name)
         return self.factory(model)
 
 
