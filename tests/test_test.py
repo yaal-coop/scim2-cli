@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 from scim2_tester import CheckResult
+from scim2_tester import CheckConfig
 from scim2_tester import Status
 
 from scim2_cli import cli
@@ -10,6 +11,7 @@ def test_nominal(runner, httpserver):
     """Test SCIM compliance test."""
     results = [
         CheckResult(
+            conf=CheckConfig(client=None),
             status=Status.SUCCESS,
             title="test1",
             description="description1",
@@ -17,6 +19,7 @@ def test_nominal(runner, httpserver):
             data="data1",
         ),
         CheckResult(
+            conf=CheckConfig(client=None),
             status=Status.ERROR,
             title="test2",
             description="description2",
@@ -43,6 +46,7 @@ def test_verbose(runner, httpserver):
     """Test SCIM compliance test."""
     results = [
         CheckResult(
+            conf=CheckConfig(client=None),
             status=Status.SUCCESS,
             title="test1",
             description="description1",
@@ -50,6 +54,7 @@ def test_verbose(runner, httpserver):
             data="data1",
         ),
         CheckResult(
+            conf=CheckConfig(client=None),
             status=Status.ERROR,
             title="test2",
             description="description2",
