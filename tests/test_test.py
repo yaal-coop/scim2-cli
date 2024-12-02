@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
-from scim2_tester import CheckResult
 from scim2_tester import CheckConfig
+from scim2_tester import CheckResult
 from scim2_tester import Status
 
 from scim2_cli import cli
