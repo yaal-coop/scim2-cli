@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Any
 from typing import TypeGuard
 
@@ -138,7 +139,7 @@ def cli(
 
     ctx.obj["client"] = scim_client
     ctx.obj["resource_models"] = {
-        resource_model.__name__.lower(): resource_model
+        re.sub(r"\[.*\]", "", resource_model.__name__.lower()): resource_model
         for resource_model in ctx.obj["client"].resource_models
     }
 
