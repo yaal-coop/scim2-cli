@@ -66,7 +66,7 @@ def search_cli(
 
     .. code-block:: bash
 
-        echo '{"startIndex": 50, "count": 10}' | scim https://scim.example search user
+        echo '{"startIndex": 50, "count": 10}' |  search user
 
     """
     if ctx.obj.get("stdin"):

@@ -26,7 +26,7 @@ def delete_cli(ctx, resource_type, id, indent):
 
     .. code-block:: bash
 
-        scim https://scim.example delete user 1234
+         delete user 1234
     """
     try:
         resource_model = ctx.obj["resource_models"][resource_type]

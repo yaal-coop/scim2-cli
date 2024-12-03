@@ -15,7 +15,7 @@ def test_cli(ctx, verbose):
 
     .. code-block:: bash
 
-        scim https://scim.example test
+         test
     """
     client = ctx.obj["client"]
     results = check_server(client)

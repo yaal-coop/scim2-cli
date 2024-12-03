@@ -55,7 +55,7 @@ Check the [reference](https://scim2-cli.readthedocs.io/en/latest/reference.html)
 Here is an example of resource creation:
 
 ```shell
-$ scim2 https://auth.example --headers "Authorization: Bearer 12345" create user --user-name "bjensen@example.com"
+$ scim2 --url https://auth.example --header "Authorization: Bearer 12345" create user --user-name "bjensen@example.com"
 {
     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
     "id": "2819c223-7f76-453a-919d-413861904646",
@@ -73,7 +73,7 @@ $ scim2 https://auth.example --headers "Authorization: Bearer 12345" create user
 Here is an example of resource query:
 
 ```shell
-$ scim2 https://auth.example --header "Authorization: Bearer 12345" query user 2819c223-7f76-453a-919d-413861904646
+$ scim2 --url https://auth.example --header "Authorization: Bearer 12345" query user 2819c223-7f76-453a-919d-413861904646
 {
     "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
     "id": "2819c223-7f76-453a-919d-413861904646",

@@ -53,13 +53,13 @@ def replace_factory(model):
 
         .. code-block:: bash
 
-            scim https://scim.example replace user --id "xxxx-yyyy" --user-name "foo" --name-given-name "bar"
+             replace user --id "xxxx-yyyy" --user-name "foo" --name-given-name "bar"
 
         Multiple attributes should be passed as JSON payloads:
 
         .. code-block:: bash
 
-            scim https://scim.example replace user \\
+             replace user \\
                 --id "xxxx-yyyy" \\
                 --user-name "foo" \\
                 --emails '[{"value":"foo@bar.example", "primary": true}, {"value": "foo@baz.example"}]'
@@ -68,7 +68,7 @@ def replace_factory(model):
 
         .. code-block:: bash
 
-            echo '{"id": "xxxx-yyyy", "userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' | scim https://scim.example replace user
+            echo '{"id": "xxxx-yyyy", "userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' |  replace user
 
         """
         if obj == model():
@@ -109,13 +109,13 @@ def replace_cli(ctx, indent):
 
     .. code-block:: bash
 
-        scim https://scim.example replace user --help
+         replace user --help
 
     If no subcommand is executed, input data is expected to be passed in JSON format to stdin:
 
     .. code-block:: bash
 
-        echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"], "id": "1234"}' | scim https://scim.example replace user
+        echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"], "id": "1234"}' |  replace user
 
     """
     if ctx.invoked_subcommand is not None:

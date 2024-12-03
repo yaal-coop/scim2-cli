@@ -74,7 +74,7 @@ def query_cli(
 
     .. code-block:: bash
 
-        echo '{"startIndex": 50, "count": 10}' | scim https://scim.example query user
+        echo '{"startIndex": 50, "count": 10}' |  query user
 
     """
     if resource_type:

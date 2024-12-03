@@ -52,13 +52,13 @@ def create_factory(model):
 
         .. code-block:: bash
 
-            scim https://scim.example create user --user-name "foo" --name-given-name "bar"
+            scim create user --user-name "foo" --name-given-name "bar"
 
         Multiple attributes should be passed as JSON payloads:
 
         .. code-block:: bash
 
-            scim https://scim.example create user \\
+            scim create user \\
                 --user-name "foo" \\
                 --emails '[{"value":"foo@bar.example", "primary": true}, {"value": "foo@baz.example"}]'
 
@@ -66,7 +66,7 @@ def create_factory(model):
 
         .. code-block:: bash
 
-            echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' | scim https://scim.example create user
+            echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' |  create user
 
         """
         if obj == model():
@@ -103,13 +103,13 @@ def create_cli(ctx, indent):
 
     .. code-block:: bash
 
-        scim https://scim.example create user --help
+         create user --help
 
     If no subcommand is executed, input data is expected to be passed in JSON format to stdin:
 
     .. code-block:: bash
 
-        echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' | scim https://scim.example create
+        echo '{"userName": "bjensen@example.com", "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]}' |  create
 
     """
     if ctx.invoked_subcommand is not None:
