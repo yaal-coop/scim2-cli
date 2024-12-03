@@ -23,8 +23,7 @@ from scim2_cli.search import search_cli
 from scim2_cli.test import test_cli
 from scim2_cli.utils import DOC_URL
 from scim2_cli.utils import HeaderType
-
-from .utils import split_headers
+from scim2_cli.utils import split_headers
 
 
 # monkeypatching pydanclick until this patch is released
