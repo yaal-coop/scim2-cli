@@ -116,10 +116,8 @@ def cli(
     if not url:
         raise click.ClickException("No SCIM server URL defined.")
 
-    ctx.obj["URL"] = url
-
     headers_dict = split_headers(header)
-    client = Client(base_url=ctx.obj["URL"], headers=headers_dict)
+    client = Client(base_url=url, headers=headers_dict)
 
     resource_models, resource_types_obj, spc_obj = load_config_files(
         schemas, resource_types, service_provider_config
