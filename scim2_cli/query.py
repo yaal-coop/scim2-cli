@@ -3,7 +3,10 @@ import sys
 import click
 from click import ClickException
 from scim2_client import SCIMClientError
+from scim2_models import ResourceType
+from scim2_models import Schema
 from scim2_models import SearchRequest
+from scim2_models import ServiceProviderConfig
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
 from .utils import DOC_URL
@@ -77,6 +80,9 @@ def query_cli(
         echo '{"startIndex": 50, "count": 10}' |  query user
 
     """
+    for model in (Schema, ResourceType, ServiceProviderConfig):
+        ctx.obj["resource_models"][model.__name__.lower()] = model
+
     if resource_type:
         try:
             resource_type = ctx.obj["resource_models"][resource_type]
