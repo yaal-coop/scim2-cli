@@ -111,6 +111,10 @@ def cli(
 ):
     """SCIM application development CLI."""
     ctx.ensure_object(dict)
+
+    if not url:
+        raise click.ClickException("No SCIM server URL defined.")
+
     ctx.obj["URL"] = url
 
     headers_dict = split_headers(header)

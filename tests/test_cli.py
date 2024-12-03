@@ -15,6 +15,12 @@ from scim2_models import User
 from scim2_cli import cli
 
 
+def test_no_url(runner):
+    result = runner.invoke(cli, ["create"])
+    assert result.exit_code == 1
+    assert "No SCIM server URL defined.\n" in result.output
+
+
 def test_help(runner):
     result = runner.invoke(cli, ["--help"])
     assert result.exit_code == 0
