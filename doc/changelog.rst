@@ -4,13 +4,16 @@ Changelog
 [0.2.0] - Unreleased
 --------------------
 
+.. warning::
+
+   The CLI API have been integraly overhauled
+
 Added
 ^^^^^
 - Python 3.13 support.
-
-Fixed
-^^^^^
-- Dynamic command parameters for ``create`` and ``replace``.
+- :class:`~scim2_models.Schema`, :class:`~scim2_models.ResourceType` and :class:`~scim2_models.ServiceProviderConfig` are now automatically discovered on the server.
+- Available resources are discovered on the server.
+- Implement :ref:`SCIM_CLI_URL <scim-url-scim_cli_url>` and :ref:`SCIM_CLI_HEADERS <scim-header-scim_cli_headers>` environment vars.
 
 [0.1.4] - 2024-07-26
 --------------------

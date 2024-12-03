@@ -11,7 +11,7 @@ from .utils import Color
 @click.pass_context
 @click.option("-v", "--verbose", is_flag=True, help="Enables verbose mode")
 def test_cli(ctx, verbose):
-    """Perform a server SCIM compliance check using :doc:`scim2-tester <scim2-tester:index>`.
+    """Perform a server SCIM compliance check using :doc:`scim2-tester <scim2_tester:index>`.
 
     .. code-block:: bash
 
