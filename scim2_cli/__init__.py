@@ -44,6 +44,36 @@ def patch_pydanclick():
 patch_pydanclick()
 
 
+def load_config_files(
+    schemas_fd, resource_types_fd, service_provider_config_fd
+) -> tuple[
+    list[type[Resource]], list[ResourceType] | None, ServiceProviderConfig | None
+]:
+    if schemas_fd:
+        schemas_payload = json.load(schemas_fd)
+        schemas_obj = [Schema.model_validate(schema) for schema in schemas_payload]
+        resource_models = [Resource.from_schema(schema) for schema in schemas_obj]
+
+    else:
+        resource_models = [User, Group]
+
+    if resource_types_fd:
+        resource_types_payload = json.load(resource_types_fd)
+        resource_types = [
+            ResourceType.model_validate(item) for item in resource_types_payload
+        ]
+    else:
+        resource_types = None
+
+    if service_provider_config_fd:
+        spc_payload = json.load(service_provider_config_fd)
+        service_provider_config = ServiceProviderConfig.model_validate(spc_payload)
+    else:
+        service_provider_config = None
+
+    return resource_models, resource_types, service_provider_config
+
+
 @click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
 @click.option("-u", "--url", help="The SCIM server endpoint.", envvar="SCIM_CLI_URL")
 @click.option(
@@ -86,27 +116,9 @@ def cli(
     headers_dict = split_headers(header)
     client = Client(base_url=ctx.obj["URL"], headers=headers_dict)
 
-    if schemas:
-        schemas_payload = json.load(schemas)
-        schemas_obj = [Schema.model_validate(schema) for schema in schemas_payload]
-        resource_models = [Resource.from_schema(schema) for schema in schemas_obj]
-
-    else:
-        resource_models = [User, Group]
-
-    if resource_types:
-        resource_types_payload = json.load(resource_types)
-        resource_types_obj = [
-            ResourceType.model_validate(item) for item in resource_types_payload
-        ]
-    else:
-        resource_types_obj = None
-
-    if service_provider_config:
-        spc_payload = json.load(service_provider_config)
-        spc_obj = ServiceProviderConfig.model_validate(spc_payload)
-    else:
-        spc_obj = None
+    resource_models, resource_types_obj, spc_obj = load_config_files(
+        schemas, resource_types, service_provider_config
+    )
 
     scim_client = SyncSCIMClient(
         client,
@@ -114,8 +126,11 @@ def cli(
         resource_types=resource_types_obj,
         service_provider_config=spc_obj,
     )
-    if not resource_types:
-        scim_client.register_naive_resource_types()
+    scim_client.discover(
+        schemas=not bool(schemas),
+        resource_types=not bool(resource_types),
+        service_provider_config=not bool(service_provider_config),
+    )
 
     ctx.obj["client"] = scim_client
     ctx.obj["resource_models"] = {

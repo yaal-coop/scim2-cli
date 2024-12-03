@@ -27,6 +27,7 @@ def test_stdin_bad_json(runner, httpserver):
         cli,
         ["--url", httpserver.url_for("/"), "query", "user"],
         input="invalid",
+        catch_exceptions=False,
     )
     assert result.exit_code == 1
     assert "Invalid JSON input." in result.stdout
@@ -99,8 +100,9 @@ def test_env_vars(runner, httpserver, simple_user_payload):
 
 
 def test_custom_configuration(runner, httpserver, simple_user_payload, tmp_path):
+    """Test passing custom .JSON configuration files to the command."""
     spc = ServiceProviderConfig(
-        documentation_uri="https://canaille.readthedocs.io",
+        documentation_uri="https://scim.test",
         patch=Patch(supported=False),
         bulk=Bulk(supported=False, max_operations=0, max_payload_size=0),
         change_password=ChangePassword(supported=True),
@@ -112,7 +114,7 @@ def test_custom_configuration(runner, httpserver, simple_user_payload, tmp_path)
                 name="OAuth Bearer Token",
                 description="Authentication scheme using the OAuth Bearer Token Standard",
                 spec_uri="http://www.rfc-editor.org/info/rfc6750",
-                documentation_uri="https://canaille.readthedocs.io",
+                documentation_uri="https://scim.test",
                 type="oauthbearertoken",
                 primary=True,
             ),
@@ -141,7 +143,6 @@ def test_custom_configuration(runner, httpserver, simple_user_payload, tmp_path)
     with open(resource_types_path, "w") as fd:
         json.dump(resource_types, fd)
 
-    """Test passing custom .JSON configuration files to the command."""
     httpserver.expect_request(
         "/somewhere-different/foobar",
         method="GET",
