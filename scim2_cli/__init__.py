@@ -7,6 +7,10 @@ from httpx import Client
 from pydantic import BaseModel
 from scim2_client.engines.httpx import SyncSCIMClient
 from scim2_models import Group
+from scim2_models import Resource
+from scim2_models import ResourceType
+from scim2_models import Schema
+from scim2_models import ServiceProviderConfig
 from scim2_models import User
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
@@ -41,7 +45,7 @@ patch_pydanclick()
 
 
 @click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
-@click.option("--url", help="The SCIM server endpoint.", envvar="SCIM_CLI_URL")
+@click.option("-u", "--url", help="The SCIM server endpoint.", envvar="SCIM_CLI_URL")
 @click.option(
     "-h",
     "--header",
@@ -50,15 +54,70 @@ patch_pydanclick()
     help="Headers to pass in the HTTP requests. Can be passed multiple times.",
     envvar="SCIM_CLI_HEADERS",
 )
+@click.option(
+    "-s",
+    "--schemas",
+    type=click.File(),
+    help="Path to a JSON file containing a list of SCIM Schemas. Those schemas will be assumed to be available on the server. If unset, they will be downloaded.",
+    envvar="SCIM_CLI_SCHEMAS",
+)
+@click.option(
+    "-r",
+    "--resource-types",
+    type=click.File(),
+    help="Path to a JSON file containing a list of SCIM ResourceType. Those resource types will be assumed to be available on the server. If unset, they will be downloaded.",
+    envvar="SCIM_CLI_RESOURCE_TYPES",
+)
+@click.option(
+    "-c",
+    "--service-provider-config",
+    type=click.File(),
+    help="Path to a JSON file containing the ServiceProviderConfig content of the server. Will be downloaded otherwise.",
+    envvar="SCIM_CLI_SERVICE_PROVIDER_CONFIG",
+)
 @click.pass_context
-def cli(ctx, url: str, header: list[str]):
+def cli(
+    ctx, url: str, header: list[str], schemas, resource_types, service_provider_config
+):
     """SCIM application development CLI."""
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
+
     headers_dict = split_headers(header)
     client = Client(base_url=ctx.obj["URL"], headers=headers_dict)
-    ctx.obj["client"] = SyncSCIMClient(client, resource_models=(User, Group))
-    ctx.obj["client"].register_naive_resource_types()
+
+    if schemas:
+        schemas_payload = json.load(schemas)
+        schemas_obj = [Schema.model_validate(schema) for schema in schemas_payload]
+        resource_models = [Resource.from_schema(schema) for schema in schemas_obj]
+
+    else:
+        resource_models = [User, Group]
+
+    if resource_types:
+        resource_types_payload = json.load(resource_types)
+        resource_types_obj = [
+            ResourceType.model_validate(item) for item in resource_types_payload
+        ]
+    else:
+        resource_types_obj = None
+
+    if service_provider_config:
+        spc_payload = json.load(service_provider_config)
+        spc_obj = ServiceProviderConfig.model_validate(spc_payload)
+    else:
+        spc_obj = None
+
+    scim_client = SyncSCIMClient(
+        client,
+        resource_models=resource_models,
+        resource_types=resource_types_obj,
+        service_provider_config=spc_obj,
+    )
+    if not resource_types:
+        scim_client.register_naive_resource_types()
+
+    ctx.obj["client"] = scim_client
     ctx.obj["resource_models"] = {
         resource_model.__name__.lower(): resource_model
         for resource_model in ctx.obj["client"].resource_models
