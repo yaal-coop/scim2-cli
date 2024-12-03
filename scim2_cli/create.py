@@ -10,15 +10,12 @@ from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 from .utils import DOC_URL
 from .utils import ModelCommand
 from .utils import formatted_payload
-from .utils import split_headers
 from .utils import unacceptable_fields
 
 
-def create_payload(client, payload, indent, headers):
+def create_payload(client, payload, indent):
     try:
-        response = client.create(
-            payload, headers=split_headers(headers), raise_scim_errors=False
-        )
+        response = client.create(payload, raise_scim_errors=False)
 
     except SCIMClientError as scim_exc:
         message = str(scim_exc)
@@ -46,12 +43,9 @@ def create_factory(model):
         default=True,
         help="Indent JSON response payloads.",
     )
-    @click.option(
-        "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
-    )
     @from_pydantic("obj", model, exclude=exclude)
     @click.pass_context
-    def create_command(ctx, indent, headers, obj: model, *args, **kwargs):
+    def create_command(ctx, indent, obj: model, *args, **kwargs):
         r"""Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request on resources endpoint.
 
         Input data can be passed through parameters like :code:`--external-id`.
@@ -83,7 +77,7 @@ def create_factory(model):
             click.echo(ctx.get_help())
             ctx.exit(1)
 
-        create_payload(ctx.obj["client"], payload, indent, headers)
+        create_payload(ctx.obj["client"], payload, indent)
 
     return create_command
 
@@ -101,10 +95,7 @@ def create_factory(model):
     default=True,
     help="Indent JSON response payloads.",
 )
-@click.option(
-    "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
-)
-def create_cli(ctx, indent, headers):
+def create_cli(ctx, indent):
     """Perform a `SCIM POST <https://www.rfc-editor.org/rfc/rfc7644#section-3.3>`_ request on resources endpoint.
 
     There are subcommands for all the available models, with dynamic attributes.
@@ -129,4 +120,4 @@ def create_cli(ctx, indent, headers):
         click.echo(ctx.get_help())
         ctx.exit(1)
 
-    create_payload(ctx.obj["client"], payload, indent, headers)
+    create_payload(ctx.obj["client"], payload, indent)

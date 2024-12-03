@@ -18,6 +18,8 @@ from scim2_cli.search import search_cli
 from scim2_cli.test import test_cli
 from scim2_cli.utils import DOC_URL
 
+from .utils import split_headers
+
 
 # monkeypatching pydanclick until this patch is released
 # https://github.com/felix-martel/pydanclick/pull/25
@@ -39,12 +41,15 @@ patch_pydanclick()
 
 @click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
 @click.option("--url", help="The SCIM server endpoint.")
+@click.option(
+    "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
+)
 @click.pass_context
-def cli(ctx, url: str):
+def cli(ctx, url: str, headers: list[str]):
     """SCIM application development CLI."""
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
-    client = Client(base_url=ctx.obj["URL"])
+    client = Client(base_url=ctx.obj["URL"], headers=split_headers(headers))
     ctx.obj["client"] = SyncSCIMClient(client, resource_models=(User, Group))
     ctx.obj["client"].register_naive_resource_types()
     ctx.obj["resource_models"] = {

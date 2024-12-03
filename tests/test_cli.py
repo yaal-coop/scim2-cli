@@ -16,3 +16,40 @@ def test_stdin_bad_json(runner, httpserver):
     )
     assert result.exit_code == 1
     assert "Invalid JSON input." in result.stdout
+
+
+def test_auth_headers(runner, httpserver, simple_user_payload):
+    """Test passing auth bearer headers."""
+    httpserver.expect_request(
+        "/Users/foobar", method="GET", headers={"Authorization": "Bearer token"}
+    ).respond_with_json(
+        simple_user_payload("foobar"),
+        status=200,
+        content_type="application/scim+json",
+    )
+
+    result = runner.invoke(
+        cli,
+        [
+            "--url",
+            httpserver.url_for("/"),
+            "query",
+            "user",
+            "foobar",
+        ],
+    )
+    assert result.exit_code == 1
+
+    result = runner.invoke(
+        cli,
+        [
+            "--url",
+            httpserver.url_for("/"),
+            "--headers",
+            "Authorization: Bearer token",
+            "query",
+            "user",
+            "foobar",
+        ],
+    )
+    assert result.exit_code == 0

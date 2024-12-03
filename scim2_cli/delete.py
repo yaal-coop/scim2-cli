@@ -9,15 +9,11 @@ from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
 from .utils import DOC_URL
 from .utils import formatted_payload
-from .utils import split_headers
 
 
 @click.command(cls=make_rst_to_ansi_formatter(DOC_URL), name="delete")
 @click.argument("resource-type", required=True)
 @click.argument("id", required=True)
-@click.option(
-    "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
-)
 @click.option(
     "--indent/--no-indent",
     is_flag=True,
@@ -25,7 +21,7 @@ from .utils import split_headers
     help="Indent JSON response payloads.",
 )
 @click.pass_context
-def delete_cli(ctx, resource_type, id, headers, indent):
+def delete_cli(ctx, resource_type, id, indent):
     """Perform a `SCIM DELETE query <https://www.rfc-editor.org/rfc/rfc7644#section-3.6>`_ request.
 
     .. code-block:: bash
@@ -41,9 +37,7 @@ def delete_cli(ctx, resource_type, id, headers, indent):
         ) from exc
 
     try:
-        response = ctx.obj["client"].delete(
-            resource_model, id, headers=split_headers(headers), raise_scim_errors=False
-        )
+        response = ctx.obj["client"].delete(resource_model, id, raise_scim_errors=False)
 
     except SCIMClientError as scim_exc:
         message = str(scim_exc)

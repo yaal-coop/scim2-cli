@@ -8,7 +8,6 @@ from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
 
 from .utils import DOC_URL
 from .utils import formatted_payload
-from .utils import split_headers
 
 
 @click.command(cls=make_rst_to_ansi_formatter(DOC_URL), name="query")
@@ -47,9 +46,6 @@ from .utils import split_headers
     help="A string indicating the order in which the “sortBy” parameter is applied.",
 )
 @click.option(
-    "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
-)
-@click.option(
     "--indent/--no-indent",
     is_flag=True,
     default=True,
@@ -66,7 +62,6 @@ def query_cli(
     filter: str,
     sort_by: str,
     sort_order: str,
-    headers: list[str],
     indent: bool,
 ):
     """Perform a `SCIM GET <https://www.rfc-editor.org/rfc/rfc7644#section-3.4.1>`_ request on the :code:`RESOURCE_TYPE` endpoint.
@@ -113,7 +108,6 @@ def query_cli(
             id,
             search_request=payload,
             check_request_payload=check_request_payload,
-            headers=split_headers(headers),
             raise_scim_errors=False,
         )
 
