@@ -23,7 +23,9 @@ def test_stdin_bad_json(runner, httpserver):
 def test_auth_headers(runner, httpserver, simple_user_payload):
     """Test passing auth bearer headers."""
     httpserver.expect_request(
-        "/Users/foobar", method="GET", headers={"Authorization": "Bearer token"}
+        "/Users/foobar",
+        method="GET",
+        headers={"Authorization": "Bearer token", "foo": "bar"},
     ).respond_with_json(
         simple_user_payload("foobar"),
         status=200,
@@ -47,8 +49,10 @@ def test_auth_headers(runner, httpserver, simple_user_payload):
         [
             "--url",
             httpserver.url_for("/"),
-            "--headers",
+            "--header",
             "Authorization: Bearer token",
+            "--header",
+            "foo: bar",
             "query",
             "user",
             "foobar",
@@ -60,7 +64,9 @@ def test_auth_headers(runner, httpserver, simple_user_payload):
 def test_env_vars(runner, httpserver, simple_user_payload):
     """Test passing host and headers with environment vars."""
     httpserver.expect_request(
-        "/Users/foobar", method="GET", headers={"Authorization": "Bearer token"}
+        "/Users/foobar",
+        method="GET",
+        headers={"Authorization": "Bearer token", "foo": "bar"},
     ).respond_with_json(
         simple_user_payload("foobar"),
         status=200,

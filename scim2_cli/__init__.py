@@ -44,18 +44,18 @@ patch_pydanclick()
 @click.option("--url", help="The SCIM server endpoint.", envvar="SCIM_CLI_URL")
 @click.option(
     "-h",
-    "--headers",
+    "--header",
     multiple=True,
     type=HeaderType(),
-    help="Header to pass in the HTTP requests.",
+    help="Headers to pass in the HTTP requests. Can be passed multiple times.",
     envvar="SCIM_CLI_HEADERS",
 )
 @click.pass_context
-def cli(ctx, url: str, headers: list[str]):
+def cli(ctx, url: str, header: list[str]):
     """SCIM application development CLI."""
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
-    headers_dict = split_headers(headers)
+    headers_dict = split_headers(header)
     client = Client(base_url=ctx.obj["URL"], headers=headers_dict)
     ctx.obj["client"] = SyncSCIMClient(client, resource_models=(User, Group))
     ctx.obj["client"].register_naive_resource_types()
