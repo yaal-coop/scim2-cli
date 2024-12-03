@@ -6,8 +6,8 @@ The :ref:`cli` command allows you to interact with a SCIM server.
 Basic parameters
 ----------------
 
-In order to connect to a SCIM server you will need to pass the :option:`scim --url` parameter.
-You can also pass additional headers, such as authentication ones, with :option:`scim --url`.
+In order to connect to a SCIM server you will need to pass the :option:`--url <scim --url>` parameter.
+You can also pass additional headers, such as authentication ones, with :option:`--header <scim --header>`.
 
 .. code-block:: shell
 
@@ -45,3 +45,24 @@ To make commands shorter, you can set those parameters once for all by using the
             "location": "https://example.com/v2/Users/2819c223-7f76-453a-919d-413861904646",
         },
     }
+
+
+Server configuration
+--------------------
+
+The CLI needs to reach the server configuration to find out which features are available,
+which resource schemas are available, and where they are located.
+
+By default the CLI will automatically discover those resources on the server, before each command is run.
+
+However you might find too time consuming to achieve all those network requests.
+You can store those data locally and reuse them for future command runs thanks to the
+:option:`--schemas <scim --schemas>`, :option:`--resource-types <scim --resource-types>` and :option:`--service-provider-config <scim --service-provider-config>` (and their corresponding environment vars :ref:`SCIM_CLI_SCHEMAS <scim-schemas-scim_cli_schemas>`, :ref:`SCIM_CLI_RESOURCE_TYPES <scim-resource_types-scim_cli_resource_types>` and :ref:`SCIM_CLI_SERVICE_PROVIDER_CONFIG <scim-service_provider_config-scim_cli_service_provider_config>`)
+
+.. code-block:: shell
+    :caption: Load the cached resources
+
+    $ export SCIM_SCHEMAS=/tmp/schemas.json
+    $ export SCIM_RESOURCE_TYPES=/tmp/resource-types.json
+    $ export SCIM_SERVICE_PROVIDER_CONFIG=/tmp/service-provider-config.json
+    $ scim2 query ...
