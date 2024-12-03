@@ -25,7 +25,7 @@ def test_no_command_stdin(runner, httpserver, simple_user_payload):
 
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "replace"],
+        ["--url", httpserver.url_for("/"), "replace"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -46,7 +46,7 @@ def test_no_command_payload_without_an_id(runner, httpserver, simple_user_payloa
 
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "replace"],
+        ["--url", httpserver.url_for("/"), "replace"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -58,11 +58,11 @@ def test_no_command_no_stdin(runner, httpserver, simple_user_payload):
     """Test missing stdin."""
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "replace"],
+        ["--url", httpserver.url_for("/"), "replace"],
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Usage: cli URL replace" in result.stdout
+    assert "Usage: cli replace" in result.stdout
 
 
 def test_no_command_scimclient_error(runner, httpserver, simple_user_payload):
@@ -87,6 +87,7 @@ def test_no_command_scimclient_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "replace",
         ],
@@ -119,6 +120,7 @@ def test_no_command_validation_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "replace",
         ],
@@ -151,7 +153,7 @@ def test_command_stdin(runner, httpserver, simple_user_payload):
 
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "replace", "user"],
+        ["--url", httpserver.url_for("/"), "replace", "user"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -176,6 +178,7 @@ def test_command_parameters(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "replace",
             "user",
@@ -197,6 +200,7 @@ def test_command_payload_without_an_id(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "replace",
             "user",
@@ -213,11 +217,11 @@ def test_command_no_stdin_no_parameter(runner, httpserver, simple_user_payload):
     """No parameter and no stdin should display the help."""
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "replace", "user"],
+        ["--url", httpserver.url_for("/"), "replace", "user"],
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Usage: cli URL replace user" in result.stdout
+    assert "Usage: cli replace user" in result.stdout
 
 
 def test_command_scimclient_error(runner, httpserver, simple_user_payload):
@@ -234,6 +238,7 @@ def test_command_scimclient_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "replace",
             "user",
@@ -262,6 +267,7 @@ def test_command_validation_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "replace",
             "user",

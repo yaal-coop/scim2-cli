@@ -17,6 +17,7 @@ def test_nominal_case(runner, httpserver):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "delete",
             "user",
@@ -41,6 +42,7 @@ def test_scimclient_error(runner, httpserver):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "delete",
             "user",
@@ -57,6 +59,7 @@ def test_bad_resource_type(runner, httpserver):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "delete",
             "invalid",
@@ -86,6 +89,7 @@ def test_not_found(runner, httpserver):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "delete",
             "user",

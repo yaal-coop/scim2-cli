@@ -38,9 +38,9 @@ patch_pydanclick()
 
 
 @click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
-@click.argument("url")
+@click.option("--url", help="The SCIM server endpoint.")
 @click.pass_context
-def cli(ctx, url):
+def cli(ctx, url: str):
     """SCIM application development CLI."""
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url

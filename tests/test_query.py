@@ -91,6 +91,7 @@ def test_all(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
         ],
@@ -130,6 +131,7 @@ def test_get_by_id(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
             "user",
@@ -148,6 +150,7 @@ def test_get_resources_without_id(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
             "user",
@@ -171,7 +174,7 @@ def test_stdin(runner, httpserver, simple_user_payload):
     payload = {"attributes": "userName"}
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "query", "user", "user-name-qs"],
+        ["--url", httpserver.url_for("/"), "query", "user", "user-name-qs"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -186,6 +189,7 @@ def test_search_request_payload(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
             "user",
@@ -221,6 +225,7 @@ def test_unknown_resource_type(
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
             "invalid",
@@ -237,6 +242,7 @@ def test_scimclient_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
             "user",
@@ -253,6 +259,7 @@ def test_validation_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "query",
             "user",

@@ -29,7 +29,7 @@ def test_nominal(runner, httpserver):
     with patch("scim2_cli.test.check_server", side_effect=[results]):
         result = runner.invoke(
             cli,
-            [httpserver.url_for("/"), "test"],
+            ["--url", httpserver.url_for("/"), "test"],
             catch_exceptions=False,
         )
         assert result.exit_code == 0, result.stdout
@@ -65,7 +65,7 @@ def test_verbose(runner, httpserver):
     with patch("scim2_cli.test.check_server", side_effect=[results]):
         result = runner.invoke(
             cli,
-            [httpserver.url_for("/"), "test", "--verbose"],
+            ["--url", httpserver.url_for("/"), "test", "--verbose"],
             catch_exceptions=False,
         )
         assert result.exit_code == 0, result.stdout

@@ -38,7 +38,7 @@ def test_stdin(runner, httpserver, simple_user_payload):
     payload = {"count": 99, "startIndex": 99}
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "search"],
+        ["--url", httpserver.url_for("/"), "search"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -59,6 +59,7 @@ def test_search_request_payload(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "search",
             "--attribute",
@@ -95,6 +96,7 @@ def test_scimclient_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "search",
             "--count",

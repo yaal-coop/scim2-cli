@@ -21,7 +21,7 @@ def test_no_command_stdin(runner, httpserver, simple_user_payload):
 
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "create"],
+        ["--url", httpserver.url_for("/"), "create"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -35,11 +35,11 @@ def test_no_command_no_stdin(runner, httpserver, simple_user_payload):
     """Test missing stdin."""
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "create"],
+        ["--url", httpserver.url_for("/"), "create"],
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Usage: cli URL create" in result.stdout
+    assert "Usage: cli create" in result.stdout
 
 
 def test_no_command_scimclient_error(runner, httpserver, simple_user_payload):
@@ -63,6 +63,7 @@ def test_no_command_scimclient_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "create",
         ],
@@ -94,6 +95,7 @@ def test_no_command_validation_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "create",
         ],
@@ -122,7 +124,7 @@ def test_command_stdin(runner, httpserver, simple_user_payload):
 
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "create", "user"],
+        ["--url", httpserver.url_for("/"), "create", "user"],
         input=json.dumps(payload),
         catch_exceptions=False,
     )
@@ -144,6 +146,7 @@ def test_command_parameters(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "create",
             "user",
@@ -162,11 +165,11 @@ def test_command_no_stdin_no_parameters(runner, httpserver, simple_user_payload)
     """No parameter nor stdin should display the help."""
     result = runner.invoke(
         cli,
-        [httpserver.url_for("/"), "create", "user"],
+        ["--url", httpserver.url_for("/"), "create", "user"],
         catch_exceptions=False,
     )
     assert result.exit_code == 1, result.stdout
-    assert "Usage: cli URL create" in result.stdout
+    assert "Usage: cli create" in result.stdout
 
 
 def test_command_validation_error(runner, httpserver, simple_user_payload):
@@ -183,6 +186,7 @@ def test_command_validation_error(runner, httpserver, simple_user_payload):
     result = runner.invoke(
         cli,
         [
+            "--url",
             httpserver.url_for("/"),
             "create",
             "user",
