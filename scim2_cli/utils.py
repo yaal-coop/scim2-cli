@@ -8,6 +8,11 @@ DOC_URL = "https://scim2-cli.readthedocs.io/"
 INDENTATION_SIZE = 4
 
 
+class HeaderType(click.ParamType):
+    envvar_list_splitter = ";"
+    name = "HEADER"
+
+
 class Color(str, Enum):
     black = "black"
     red = "red"

@@ -1,3 +1,5 @@
+import os
+
 from scim2_cli import cli
 
 
@@ -53,3 +55,26 @@ def test_auth_headers(runner, httpserver, simple_user_payload):
         ],
     )
     assert result.exit_code == 0
+
+
+def test_env_vars(runner, httpserver, simple_user_payload):
+    """Test passing host and headers with environment vars."""
+    httpserver.expect_request(
+        "/Users/foobar", method="GET", headers={"Authorization": "Bearer token"}
+    ).respond_with_json(
+        simple_user_payload("foobar"),
+        status=200,
+        content_type="application/scim+json",
+    )
+
+    result = runner.invoke(cli, ["query", "user"])
+    assert result.exit_code == 1
+
+    os.environ["SCIM_CLI_URL"] = httpserver.url_for("/")
+    os.environ["SCIM_CLI_HEADERS"] = "Authorization: Bearer token;foo: bar"
+    try:
+        result = runner.invoke(cli, ["query", "user", "foobar"], catch_exceptions=False)
+        assert result.exit_code == 0
+    finally:
+        del os.environ["SCIM_CLI_URL"]
+        del os.environ["SCIM_CLI_HEADERS"]

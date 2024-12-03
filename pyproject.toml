@@ -49,7 +49,6 @@ dev = [
     "pytest-httpserver>=1.0.10",
     "tox-uv>=1.16.0",
 ]
-
 doc = [
     "shibuya>=2024.5.15",
     "sphinx>=7.3.7",
@@ -57,7 +56,6 @@ doc = [
     "sphinx-issues >= 5.0.0",
     "myst-parser>=3.0.1",
 ]
-
 bundle = [
     "pyinstaller>=6.10.0",
 ]

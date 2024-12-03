@@ -17,6 +17,7 @@ from scim2_cli.replace import replace_cli
 from scim2_cli.search import search_cli
 from scim2_cli.test import test_cli
 from scim2_cli.utils import DOC_URL
+from scim2_cli.utils import HeaderType
 
 from .utils import split_headers
 
@@ -40,16 +41,22 @@ patch_pydanclick()
 
 
 @click.group(cls=make_rst_to_ansi_formatter(DOC_URL, group=True))
-@click.option("--url", help="The SCIM server endpoint.")
+@click.option("--url", help="The SCIM server endpoint.", envvar="SCIM_CLI_URL")
 @click.option(
-    "-h", "--headers", multiple=True, help="Header to pass in the HTTP requests."
+    "-h",
+    "--headers",
+    multiple=True,
+    type=HeaderType(),
+    help="Header to pass in the HTTP requests.",
+    envvar="SCIM_CLI_HEADERS",
 )
 @click.pass_context
 def cli(ctx, url: str, headers: list[str]):
     """SCIM application development CLI."""
     ctx.ensure_object(dict)
     ctx.obj["URL"] = url
-    client = Client(base_url=ctx.obj["URL"], headers=split_headers(headers))
+    headers_dict = split_headers(headers)
+    client = Client(base_url=ctx.obj["URL"], headers=headers_dict)
     ctx.obj["client"] = SyncSCIMClient(client, resource_models=(User, Group))
     ctx.obj["client"].register_naive_resource_types()
     ctx.obj["resource_models"] = {
