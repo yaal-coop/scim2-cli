@@ -967,8 +967,8 @@ requires-dist = [
     { name = "click", specifier = ">=8.1.7" },
     { name = "pydanclick", specifier = ">=0.3.0" },
     { name = "pygments", specifier = ">=2.18.0" },
-    { name = "scim2-client", specifier = ">=0.2.0" },
-    { name = "scim2-tester", extras = ["httpx"], specifier = ">=0.1.3" },
+    { name = "scim2-client", specifier = ">=0.4.0" },
+    { name = "scim2-tester", extras = ["httpx"], specifier = ">=0.1.10" },
     { name = "sphinx-click-rst-to-ansi-formatter", specifier = ">=0.1.0" },
 ]
 
