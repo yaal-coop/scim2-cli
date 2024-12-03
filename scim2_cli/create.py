@@ -31,6 +31,9 @@ def create_payload(client, payload, indent):
 
 
 def create_factory(model):
+    if not model:
+        raise ClickException("Invalid model")
+
     exclude = unacceptable_fields(Context.RESOURCE_CREATION_REQUEST, model)
 
     @click.command(

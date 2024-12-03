@@ -31,6 +31,9 @@ def replace_payload(client, payload, indent):
 
 
 def replace_factory(model):
+    if not model:
+        raise ClickException("Invalid model")
+
     exclude = unacceptable_fields(Context.RESOURCE_REPLACEMENT_REQUEST, model)
     exclude.remove("id")
 

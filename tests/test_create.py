@@ -3,6 +3,28 @@ import json
 from scim2_cli import cli
 
 
+def test_no_command(runner, httpserver):
+    """Test that no command displays the help."""
+    result = runner.invoke(
+        cli,
+        ["--url", httpserver.url_for("/"), "create"],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 1, result.stdout
+    assert "create user --help" in result.stdout
+
+
+def test_invalid_command(runner, httpserver):
+    """Test invalid command."""
+    result = runner.invoke(
+        cli,
+        ["--url", httpserver.url_for("/"), "create", "invalid"],
+        catch_exceptions=False,
+    )
+    assert result.exit_code == 1, result.stdout
+    assert "Error: Invalid model" in result.stdout
+
+
 def test_no_command_stdin(runner, httpserver, simple_user_payload):
     """Test that JSON stdin is passed in the POST request."""
     response_payload = simple_user_payload("new-user")
