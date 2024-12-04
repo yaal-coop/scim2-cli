@@ -7,6 +7,7 @@ Changelog
 Added
 ^^^^^
 - Display server discovery step network connections.
+- Support loading server configuration objects in :class:`~scim2_models.ListResponses`.
 
 [0.2.0] - 2024-12-03
 --------------------

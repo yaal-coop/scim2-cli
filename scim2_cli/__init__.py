@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from scim2_client import SCIMClientError
 from scim2_client.engines.httpx import SyncSCIMClient
 from scim2_models import Group
+from scim2_models import ListResponse
 from scim2_models import Resource
 from scim2_models import ResourceType
 from scim2_models import Schema
@@ -53,7 +54,10 @@ def load_config_files(
 ]:
     if schemas_fd:
         schemas_payload = json.load(schemas_fd)
-        schemas_obj = [Schema.model_validate(schema) for schema in schemas_payload]
+        if isinstance(schemas_payload, dict):
+            schemas_obj = ListResponse[Schema].model_validate(schemas_payload).resources
+        else:
+            schemas_obj = [Schema.model_validate(schema) for schema in schemas_payload]
         resource_models = [Resource.from_schema(schema) for schema in schemas_obj]
 
     else:
@@ -61,9 +65,16 @@ def load_config_files(
 
     if resource_types_fd:
         resource_types_payload = json.load(resource_types_fd)
-        resource_types = [
-            ResourceType.model_validate(item) for item in resource_types_payload
-        ]
+        if isinstance(schemas_payload, dict):
+            resource_types = (
+                ListResponse[ResourceType]
+                .model_validate(resource_types_payload)
+                .resources
+            )
+        else:
+            resource_types = [
+                ResourceType.model_validate(item) for item in resource_types_payload
+            ]
     else:
         resource_types = None
 
