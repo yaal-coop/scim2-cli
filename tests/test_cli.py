@@ -112,7 +112,9 @@ def test_env_vars(runner, httpserver, simple_user_payload):
         del os.environ["SCIM_CLI_HEADERS"]
 
 
-def test_custom_configuration(runner, httpserver, simple_user_payload, tmp_path):
+def test_custom_configuration_by_parameter(
+    runner, httpserver, simple_user_payload, tmp_path
+):
     """Test passing custom .JSON configuration files to the command."""
     spc = ServiceProviderConfig(
         documentation_uri="https://scim.test",
@@ -183,3 +185,78 @@ def test_custom_configuration(runner, httpserver, simple_user_payload, tmp_path)
         catch_exceptions=False,
     )
     assert result.exit_code == 0
+
+
+def test_custom_configuration_by_env(runner, httpserver, simple_user_payload, tmp_path):
+    """Test passing custom .JSON configuration files to the command."""
+    spc = ServiceProviderConfig(
+        documentation_uri="https://scim.test",
+        patch=Patch(supported=False),
+        bulk=Bulk(supported=False, max_operations=0, max_payload_size=0),
+        change_password=ChangePassword(supported=True),
+        filter=Filter(supported=False, max_results=0),
+        sort=Sort(supported=False),
+        etag=ETag(supported=False),
+        authentication_schemes=[
+            AuthenticationScheme(
+                name="OAuth Bearer Token",
+                description="Authentication scheme using the OAuth Bearer Token Standard",
+                spec_uri="http://www.rfc-editor.org/info/rfc6750",
+                documentation_uri="https://scim.test",
+                type="oauthbearertoken",
+                primary=True,
+            ),
+        ],
+    ).model_dump()
+
+    spc_path = tmp_path / "service_provider_configuration.json"
+    with open(spc_path, "w") as fd:
+        json.dump(spc, fd)
+
+    schemas = [User.to_schema().model_dump()]
+    schemas_path = tmp_path / "schemas.json"
+    with open(schemas_path, "w") as fd:
+        json.dump(schemas, fd)
+
+    resource_types = [
+        ResourceType(
+            id="User",
+            name="User",
+            endpoint="/somewhere-different",
+            description="User accounts",
+            schema_="urn:ietf:params:scim:schemas:core:2.0:User",
+        ).model_dump()
+    ]
+    resource_types_path = tmp_path / "resource_types.json"
+    with open(resource_types_path, "w") as fd:
+        json.dump(resource_types, fd)
+
+    httpserver.expect_request(
+        "/somewhere-different/foobar",
+        method="GET",
+    ).respond_with_json(
+        simple_user_payload("foobar"),
+        status=200,
+        content_type="application/scim+json",
+    )
+
+    os.environ["SCIM_CLI_SERVICE_PROVIDER_CONFIG"] = str(spc_path)
+    os.environ["SCIM_CLI_SCHEMAS"] = str(schemas_path)
+    os.environ["SCIM_CLI_RESOURCE_TYPES"] = str(resource_types_path)
+    try:
+        result = runner.invoke(
+            cli,
+            [
+                "--url",
+                httpserver.url_for("/"),
+                "query",
+                "user",
+                "foobar",
+            ],
+            catch_exceptions=False,
+        )
+        assert result.exit_code == 0
+    finally:
+        del os.environ["SCIM_CLI_SERVICE_PROVIDER_CONFIG"]
+        del os.environ["SCIM_CLI_SCHEMAS"]
+        del os.environ["SCIM_CLI_RESOURCE_TYPES"]
