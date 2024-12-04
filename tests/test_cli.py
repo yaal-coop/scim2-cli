@@ -27,6 +27,13 @@ def test_help(runner):
     assert "SCIM application development CLI.\n" in result.output
 
 
+def test_bad_server(runner):
+    """Test that the discovery step display a readable error when a bad server has been passed."""
+    result = runner.invoke(cli, ["--url", "http://scim.invalid", "query"])
+    assert result.exit_code == 1
+    assert "Error: Network error happened during request\n" in result.output
+
+
 def test_stdin_bad_json(runner, httpserver):
     """Test that invalid JSON stdin raise an error."""
     result = runner.invoke(

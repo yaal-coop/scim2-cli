@@ -1,11 +1,11 @@
-import sys
-
 import click
 from click import ClickException
 from pydanclick import from_pydantic
 from scim2_client import SCIMClientError
 from scim2_models import Context
 from sphinx_click.rst_to_ansi_formatter import make_rst_to_ansi_formatter
+
+from scim2_cli.utils import exception_to_click_error
 
 from .utils import DOC_URL
 from .utils import ModelCommand
@@ -18,13 +18,7 @@ def replace_payload(client, payload, indent):
         response = client.replace(payload, raise_scim_errors=False)
 
     except SCIMClientError as scim_exc:
-        message = str(scim_exc)
-        if sys.version_info >= (3, 11) and hasattr(
-            scim_exc, "__notes__"
-        ):  # pragma: no cover
-            for note in scim_exc.__notes__:
-                message = f"{message}\n{note}"
-        raise ClickException(message) from scim_exc
+        raise exception_to_click_error(scim_exc) from scim_exc
 
     payload = formatted_payload(response.model_dump(), indent)
     click.echo(payload)

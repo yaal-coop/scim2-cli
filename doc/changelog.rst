@@ -1,6 +1,13 @@
 Changelog
 =========
 
+[0.2.1] - Unreleased
+--------------------
+
+Added
+^^^^^
+- Display server discovery step network connections.
+
 [0.2.0] - 2024-12-03
 --------------------
 

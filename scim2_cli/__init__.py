@@ -6,6 +6,7 @@ from typing import TypeGuard
 import click
 from httpx import Client
 from pydantic import BaseModel
+from scim2_client import SCIMClientError
 from scim2_client.engines.httpx import SyncSCIMClient
 from scim2_models import Group
 from scim2_models import Resource
@@ -23,6 +24,7 @@ from scim2_cli.search import search_cli
 from scim2_cli.test import test_cli
 from scim2_cli.utils import DOC_URL
 from scim2_cli.utils import HeaderType
+from scim2_cli.utils import exception_to_click_error
 from scim2_cli.utils import split_headers
 
 
@@ -128,11 +130,14 @@ def cli(
         resource_types=resource_types_obj,
         service_provider_config=spc_obj,
     )
-    scim_client.discover(
-        schemas=not bool(schemas),
-        resource_types=not bool(resource_types),
-        service_provider_config=not bool(service_provider_config),
-    )
+    try:
+        scim_client.discover(
+            schemas=not bool(schemas),
+            resource_types=not bool(resource_types),
+            service_provider_config=not bool(service_provider_config),
+        )
+    except SCIMClientError as exc:
+        raise exception_to_click_error(exc) from exc
 
     ctx.obj["client"] = scim_client
     ctx.obj["resource_models"] = {

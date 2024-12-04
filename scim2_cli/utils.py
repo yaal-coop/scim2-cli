@@ -1,4 +1,5 @@
 import json
+import sys
 from enum import Enum
 
 import click
@@ -104,3 +105,12 @@ def unacceptable_fields(context, model):
         for field_name in model.model_fields
         if not is_field_acceptable(context, model, field_name)
     ]
+
+
+def exception_to_click_error(exception):
+    message = str(exception)
+    if sys.version_info >= (3, 11) and hasattr(
+        exception, "__notes__"
+    ):  # pragma: no cover
+        message += "\n" + "\n".join(exception.__notes__)
+    return click.ClickException(message)
