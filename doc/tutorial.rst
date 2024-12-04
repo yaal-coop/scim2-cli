@@ -60,6 +60,13 @@ You can store those data locally and reuse them for future command runs thanks t
 :option:`--schemas <scim --schemas>`, :option:`--resource-types <scim --resource-types>` and :option:`--service-provider-config <scim --service-provider-config>` (and their corresponding environment vars :ref:`SCIM_CLI_SCHEMAS <scim-schemas-scim_cli_schemas>`, :ref:`SCIM_CLI_RESOURCE_TYPES <scim-resource_types-scim_cli_resource_types>` and :ref:`SCIM_CLI_SERVICE_PROVIDER_CONFIG <scim-service_provider_config-scim_cli_service_provider_config>`)
 
 .. code-block:: shell
+    :caption: Save the configuration resources
+
+    $ scim query schema > /tmp/schemas.json
+    $ scim query resourcetype > /tmp/resource-types.json
+    $ scim query serviceproviderconfig > /tmp/service-provider-config.json
+
+.. code-block:: shell
     :caption: Load the cached resources
 
     $ export SCIM_SCHEMAS=/tmp/schemas.json
