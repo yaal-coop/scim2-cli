@@ -50,7 +50,7 @@ To make commands shorter, you can set those parameters once for all by using the
 Server configuration
 --------------------
 
-The CLI needs to reach the server configuration to find out which features are available,
+Before doing anything, the CLI needs to reach the server configuration to find out which features are available,
 which resource schemas are available, and where they are located.
 
 By default the CLI will automatically discover those resources on the server, before each command is run.
@@ -73,3 +73,15 @@ You can store those data locally and reuse them for future command runs thanks t
     $ export SCIM_RESOURCE_TYPES=/tmp/resource-types.json
     $ export SCIM_SERVICE_PROVIDER_CONFIG=/tmp/service-provider-config.json
     $ scim2 query ...
+
+Query and search resources
+--------------------------
+The :ref:`query` and :ref:`search` commands can be used to look for resources.
+:ref:`query` performs ag `GET` request on the resources endpoint, while :ref:`search` performs a `POST` request on the ``/.search`` endpoint.
+Both commands take similar options such as :option:`--count <scim-query.--count>` or :option:`--attributes <scim-query.--attributes>`.
+An exhaustive list of options can be found on the :doc:`reference`.
+:ref:`query` can also take a :option:`RESOURCE_TYPE <scim-query.RESOURCE_TYPE>` and a :option:`ID <scim-query.ID>` parameters.
+
+- If none are set, all the resources of the server are queried.
+- If :option:`RESOURCE_TYPE <scim-query.RESOURCE_TYPE>` and :option:`ID <scim-query.ID>` is unset, all the resource of the kind passed in parameter are returned.
+- If both options are set, the very resource with the ID are returned.
