@@ -109,7 +109,7 @@ An exhaustive list of options can be found on the :doc:`reference`.
           "itemsPerPage": 50,
           "Resources": [...]
       }
-- If :option:`RESOURCE_TYPE <scim-query.RESOURCE_TYPE>` and :option:`ID <scim-query.ID>` is unset, all the resource of the kind passed in parameter are returned.
+- If :option:`RESOURCE_TYPE <scim-query.RESOURCE_TYPE>` is set and :option:`ID <scim-query.ID>` is unset, all the resource of the kind passed in parameter are returned.
 
   .. code-block:: console
       :caption: Querying all the users from the server.
