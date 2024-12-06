@@ -12,7 +12,19 @@ from .utils import Color
 @click.command(cls=make_rst_to_ansi_formatter(DOC_URL), name="test")
 @click.pass_context
 @click.option("-v", "--verbose", is_flag=True, help="Enables verbose mode")
-def test_cli(ctx, verbose):
+@click.option(
+    "--check-status-code/--dont-check-status-code",
+    is_flag=True,
+    default=True,
+    help="Fail on unexpected return codes.",
+)
+@click.option(
+    "--check-content-type/--dont-check-content-type",
+    is_flag=True,
+    default=True,
+    help="Fail on unexpected content types.",
+)
+def test_cli(ctx, verbose, check_status_code, check_content_type):
     """Perform a server SCIM compliance check using :doc:`scim2-tester <scim2_tester:index>`.
 
     .. code-block:: bash
@@ -20,6 +32,8 @@ def test_cli(ctx, verbose):
          test
     """
     client = ctx.obj["client"]
+    client.check_status_code = check_status_code
+    client.check_content_type = check_content_type
     results = check_server(client)
     click.echo(f"Performing a SCIM compliance check on {client.client.base_url} ...")
     success = True

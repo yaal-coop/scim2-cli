@@ -7,6 +7,7 @@ Changelog
 Added
 ^^^^^
 - The :ref:`test` command returns 1 in case of errors.
+- Added :ref:`test` ``--dont-check-content-type`` and ``--dont-check-status-code`` options.
 
 [0.2.1] - 2024-12-04
 --------------------
