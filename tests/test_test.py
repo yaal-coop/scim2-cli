@@ -32,7 +32,6 @@ def test_nominal(runner, httpserver):
             ["--url", httpserver.url_for("/"), "test"],
             catch_exceptions=False,
         )
-        assert result.exit_code == 0, result.stdout
 
         expected_output = f"""Performing a SCIM compliance check on http://localhost:{httpserver.port}/ ...
 SUCCESS test1
@@ -68,7 +67,6 @@ def test_verbose(runner, httpserver):
             ["--url", httpserver.url_for("/"), "test", "--verbose"],
             catch_exceptions=False,
         )
-        assert result.exit_code == 0, result.stdout
 
         expected_output = f"""Performing a SCIM compliance check on http://localhost:{httpserver.port}/ ...
 SUCCESS test1
@@ -79,3 +77,12 @@ ERROR test2
   data2
 """
         assert result.output == expected_output
+
+
+def test_failure(runner, httpserver):
+    """Test SCIM compliance test failure."""
+    result = runner.invoke(
+        cli,
+        ["--url", "http://scim.invalid", "test"],
+    )
+    assert result.exit_code == 1, result.stdout

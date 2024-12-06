@@ -1,3 +1,5 @@
+import sys
+
 import click
 from scim2_tester import Status
 from scim2_tester import check_server
@@ -20,14 +22,18 @@ def test_cli(ctx, verbose):
     client = ctx.obj["client"]
     results = check_server(client)
     click.echo(f"Performing a SCIM compliance check on {client.client.base_url} ...")
+    success = True
     for result in results:
         if result.status == Status.SUCCESS:
             status = click.style(result.status.name, fg=Color.green)
         else:
             status = click.style(result.status.name, fg=Color.red)
+            success = False
         click.echo(f"{status} {result.title}")
 
         if result.reason:
             click.echo(f"  {result.reason}")
             if verbose and result.data:
                 click.echo(f"  {result.data}")
+
+    sys.exit(0 if success else 1)

@@ -1,6 +1,13 @@
 Changelog
 =========
 
+[0.2.2] - Unreleased
+--------------------
+
+Added
+^^^^^
+- The :ref:`test` command returns 1 in case of errors.
+
 [0.2.1] - 2024-12-04
 --------------------
 
